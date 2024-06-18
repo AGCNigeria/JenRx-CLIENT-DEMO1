@@ -25,6 +25,7 @@ function loader(htmlID, loaderType, script, data, css, spin) {
     var type = "GET";
   }
   else if (loaderType == "php") {
+    return (false);
     var url = directory_php + script + ".php";
     var dataType = "json";
     var type = "POST";
