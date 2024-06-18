@@ -1,0 +1,325 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Charts Accounts
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i><i class="fa fa-line-chart active"></i> Charts Accounts</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Charts Accounts</h3>
+    </div>
+    <div class="box-body">
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 1. Area Chart - Total and Profit</small>
+        <div class="chart" id="area-chart-total-profit" style="width: 800px; height: 300px;"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        Showing Results for &nbsp;
+        <select id="accounts-charts-sort-type" onchange='loadAccountsCharts();'>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+        </select> &nbsp;
+        <input type="number" id="accounts-charts-sort-limit" value="10" min="1" step="1" style="width: 50px;" oninput='loadAccountsCharts();'>
+        &nbsp; in Figures 2, 3, 4 and 5.
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 2. Pie Chart - Profit</small>
+        <div class="chart" id="pie-chart-profit" style="width: 800px; height: 300px;"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 3. Pie Chart - Total</small>
+        <div class="chart" id="pie-chart-total" style="width: 800px; height: 300px;"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 4. Pie Chart - Quantity</small>
+        <div class="chart" id="pie-chart-quantity" style="width: 800px; height: 300px;"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 5. Bar Chart - Profit, Total and Quantity</small>
+        <div class="chart" id="bar-chart" style="width: 800px; height: 300px;"></div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <br><br><br><br>
+        <small>Figure 6. Table - Quantity, Total and Profit</small>
+        <br><br>
+        <table class="table table-hover" id="table-chart-search">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Inventory</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Profit</th>
+            </tr>
+          </thead>
+          <tbody id="table-chart"></tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Inventory</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Profit</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    loadAccountsCharts();
+    loadTableChart(getStorage("jenrxChartArrayInventory"));
+  });
+  function loadAccountsCharts() {
+    loadAreaChartTotalProfit(getStorage("jenrxChartArrayTotalProfit"));
+    loadPieChartProfit(getStorage("jenrxChartArrayInventory"));
+    loadPieChartTotal(getStorage("jenrxChartArrayInventory"));
+    loadPieChartQuantity(getStorage("jenrxChartArrayInventory"));
+    loadBarChart(getStorage("jenrxChartArrayInventory"));
+    settingsApply();
+  }
+  function loadAreaChartTotalProfit(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      $("#area-chart-total-profit").html("");
+      var area = new Morris.Area({
+        element: "area-chart-total-profit",
+        resize: true,
+        data: data,
+        xkey: "date",
+        ykeys: ["total", "profit"],
+        labels: ["Total", "Profit"],
+        lineColors: ['#A0D0E0', '#3C8DBC'],
+        hideHover: "auto"
+      });
+    }
+  }
+  function loadPieChartProfit(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      var sort_type = $("#accounts-charts-sort-type").val();
+      var sort_limit = $("#accounts-charts-sort-limit").val();
+      var pieChartColors = [];
+      var pieChartProfitData = [];
+      if (sort_type == "top") {
+        data = data.sort((a, b) => b.profit - a.profit);
+      }
+      else if (sort_type == "bottom") {
+        data = data.sort((a, b) => a.profit - b.profit);
+      }
+      else {
+
+      }
+      for (var i = 0; i < data.length; i++) {
+        if (i < sort_limit) {
+          if (i % 1 == 0) {
+            var color = "#3C8DBC";
+          }
+          if (i % 2 == 0) {
+            var color = "#F56954";
+          }
+          if (i % 3 == 0) {
+            var color = "#00A65A";
+          }
+          pieChartColors.push(color);
+          pieChartProfitData.push({
+            label: data[i].inventory,
+            value: data[i].profit
+          });
+        }
+        else {
+          break;
+        }
+      }
+      $("#pie-chart-profit").html("");
+      var donut = new Morris.Donut({
+        element: "pie-chart-profit",
+        resize: true,
+        colors: pieChartColors,
+        data: pieChartProfitData,
+        hideHover: "auto"
+      });
+    }
+  }
+  function loadPieChartTotal(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      var sort_type = $("#accounts-charts-sort-type").val();
+      var sort_limit = $("#accounts-charts-sort-limit").val();
+      var pieChartColors = [];
+      var pieChartTotalData = [];
+      if (sort_type == "top") {
+        data = data.sort((a, b) => b.total - a.total);
+      }
+      else if (sort_type == "bottom") {
+        data = data.sort((a, b) => a.total - b.total);
+      }
+      else {
+
+      }
+      for (var i = 0; i < data.length; i++) {
+        if (i < sort_limit) {
+          if (i % 1 == 0) {
+            var color = "#3C8DBC";
+          }
+          if (i % 2 == 0) {
+            var color = "#F56954";
+          }
+          if (i % 3 == 0) {
+            var color = "#00A65A";
+          }
+          pieChartColors.push(color);
+          pieChartTotalData.push({
+            label: data[i].inventory,
+            value: data[i].total
+          });
+        }
+        else {
+          break;
+        }
+      }
+      $("#pie-chart-total").html("");
+      var donut = new Morris.Donut({
+        element: "pie-chart-total",
+        resize: true,
+        colors: pieChartColors,
+        data: pieChartTotalData,
+        hideHover: "auto"
+      });
+    }
+  }
+  function loadPieChartQuantity(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      var sort_type = $("#accounts-charts-sort-type").val();
+      var sort_limit = $("#accounts-charts-sort-limit").val();
+      var pieChartColors = [];
+      var pieChartQuantityData = [];
+      if (sort_type == "top") {
+        data = data.sort((a, b) => b.quantity - a.quantity);
+      }
+      else if (sort_type == "bottom") {
+        data = data.sort((a, b) => a.quantity - b.quantity);
+      }
+      else {
+
+      }
+      for (var i = 0; i < data.length; i++) {
+        if (i < sort_limit) {
+          if (i % 1 == 0) {
+            var color = "#3C8DBC";
+          }
+          if (i % 2 == 0) {
+            var color = "#F56954";
+          }
+          if (i % 3 == 0) {
+            var color = "#00A65A";
+          }
+          pieChartColors.push(color);
+          pieChartQuantityData.push({
+            label: data[i].inventory,
+            value: data[i].quantity
+          });
+        }
+        else {
+          break;
+        }
+      }
+      $("#pie-chart-quantity").html("");
+      var donut = new Morris.Donut({
+        element: "pie-chart-quantity",
+        resize: true,
+        colors: pieChartColors,
+        data: pieChartQuantityData,
+        hideHover: "auto"
+      });
+    }
+  }
+  function loadBarChart(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      var sort_type = $("#accounts-charts-sort-type").val();
+      var sort_limit = $("#accounts-charts-sort-limit").val();
+      var barChartData = [];
+      if (sort_type == "top") {
+        data = data.sort((a, b) => b.profit - a.profit);
+      }
+      else if (sort_type == "bottom") {
+        data = data.sort((a, b) => a.profit - b.profit);
+      }
+      else {
+
+      }
+      for (var i = 0; i < data.length; i++) {
+        if (i < sort_limit) {
+          barChartData.push({
+            inventory: data[i].inventory,
+            quantity: data[i].quantity,
+            total: data[i].total,
+            profit: data[i].profit
+          });
+        }
+        else {
+          break;
+        }
+      }
+      $("#bar-chart").html("");
+      var bar = new Morris.Bar({
+        element: "bar-chart",
+        resize: true,
+        data: barChartData,
+        barColors: ["#00A65A", "#3C8DBC", "#F56954"],
+        xkey: "inventory",
+        ykeys: ["profit", "total", "quantity"],
+        labels: ["Profit", "Total", "Quantity"],
+        hideHover: "auto"
+      });
+    }
+  }
+  function loadTableChart(data) {
+    data = $.parseJSON(data);
+    if (data) {
+      data = data.sort((a, b) => b.profit - a.profit);
+      var tr = "";
+      var total = 0;
+      var profit = 0;
+      for (var i = 0; i < data.length; i++) {
+        tr += '<tr><td>' + (i + 1) + '</td><td>' + data[i].inventory + '</td><td>' + data[i].quantity.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td><td>' + data[i].total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td><td>' + data[i].profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td></tr>';
+        total += data[i].total;
+        profit += data[i].profit;
+      }
+      $("#table-chart-search").DataTable().destroy();
+      $("#table-chart").html(tr);
+      var titleAttr = 'Accounts Charts - ' + $("#form-accounts-search #startDate").val() + ' ' + $("#form-accounts-search #startTime").val() + ' - ' + $("#form-accounts-search #endDate").val() + ' ' + $("#form-accounts-search #endTime").val() + '\n' + ' Total ' + getStorage("settingsSalesCurrency") + total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + ' Profit ' + getStorage("settingsSalesCurrency") + profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+      dataTablesButtons("table-chart-search", titleAttr);
+    }
+  }
+</script>

@@ -1,0 +1,130 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Suppliers List
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="glyphicon glyphicon-user text-white"></i><i class="fa fa-list active"></i> Suppliers List</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Suppliers List</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#suppliers-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='suppliersList("active");'>All</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='suppliersList("inactive");'>Inactive</button>
+          <br><br><br>
+        </div>
+      </div>
+      <div class="col-md-12 table-responsive" id="suppliers-list-result">
+        <table id="table-suppliers-list" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Company</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody id="suppliers-list-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Company</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Dates</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-suppliers-list-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#suppliers-list-result").hide();
+    suppliersList("active");
+  });
+  function suppliersList(status) {
+    loader("table-suppliers-list-loader", "py", 'suppliers/list/' + status, { status: status }, "", true);
+  }
+  function loadTableSuppliersList(status, data) {
+    var suppliers_list = "";
+    var id = 1;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].supplier_id) {
+        if (status == "active") {
+          var inactivate_supplier = '<button type="button" class="btn btn-danger btn-xs" title="Inactivate Supplier" onclick="inactivateSupplier(' + data[i].supplier_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_supplier = '<button type="button" class="btn btn-info btn-xs" title="Update Supplier" onclick="updateSupplier(' + data[i].supplier_id + ');"><i class="fa fa-edit"></i></button>';
+        }
+        else {
+          var inactivate_supplier = '<button type="button" class="btn btn-black btn-xs" title="Reactivate Supplier" onclick="reactivateSupplier(' + data[i].supplier_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_supplier = "";
+        }
+        var dates = '<button type="button" class="btn btn-primary btn-xs">Created: ' + data[i].created + '</button><button type="button" class="btn btn-info btn-xs">Updated: ' + data[i].updated + '</button>';
+        suppliers_list = suppliers_list + '<tr>' +
+            '<td>' + inactivate_supplier + update_supplier + id + '</td>' +
+            '<td>' + data[i].title + '</td>' +
+            '<td>' + data[i].firstname + '</td>' +
+            '<td>' + data[i].lastname + '</td>' +
+            '<td>' + data[i].gender + '</td>' +
+            '<td>' + data[i].company + '</td>' +
+            '<td>' + data[i].address + '</td>' +
+            '<td>' + data[i].phone + '</td>' +
+            '<td>' + data[i].email + '</td>' +
+            '<td>' + dates + '</td>' +
+          '</tr>';
+        id++;
+      }
+    }
+    $("#table-suppliers-list").DataTable().destroy();
+    $("#table-suppliers-list-loader").html("");
+    $("#suppliers-list-list").html(suppliers_list);
+    var titleAttr = 'Suppliers List - ' + status.toUpperCase() + ' - ' + new Date();
+    dataTablesButtons("table-suppliers-list", titleAttr);
+    $("#suppliers-list-result").show();
+  }
+  function inactivateSupplier(supplier) {
+    loader("html-content", "popup", "suppliers-inactivate", "", "", false);
+    setTimeout(function() { $("#form-suppliers-select #supplier").append(new Option("Inactivate Supplier", supplier, true, true)).trigger('change'); }, 1000);
+  }
+  function updateSupplier(supplier) {
+    loader("html-content", "popup", "suppliers-update", "", "", false);
+    setTimeout(function() { $("#form-suppliers-select #supplier").append(new Option("Update Supplier", supplier, true, true)).trigger('change'); }, 1000);
+  }
+  function reactivateSupplier(supplier) {
+    loader("html-content", "popup", "suppliers-reactivate", "", "", false);
+    setTimeout(function() { $("#form-suppliers-select #supplier").append(new Option("Reactivate Supplier", supplier, true, true)).trigger('change'); }, 1000);
+  }
+</script>

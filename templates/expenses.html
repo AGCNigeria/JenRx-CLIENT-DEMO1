@@ -1,0 +1,72 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Expenses
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i> Expenses</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <a href="#" onclick='loader("html-content", "popup", "expenses-add", "", "", false);'>
+            <h3 class="text-white">Add</h3>
+          </a>
+
+          <a href="#" onclick='loader("html-content", "popup", "expenses-add", "", "", false);'>
+            <p class="text-white">Add Expenses</p>
+          </a>
+        </div>
+        <div class="icon">
+          <a href="#" onclick='loader("html-content", "popup", "expenses-add", "", "", false);'>
+            <i class="fa fa-book text-white"></i>
+            <i class="fa fa-plus text-white"></i>
+          </a>
+        </div>
+        <a href="#" onclick='loader("html-content", "popup", "expenses-add", "", "", false);' class="small-box-footer text-white">Add Expenses <i class="fa fa-arrow-circle-right text-white"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <a href="#" onclick='loader("expenses-content", "templates", "expenses-search", "", "", true);scroll("expenses-content");'>
+            <h3 class="text-white">Search</h3>
+          </a>
+
+          <a href="#" onclick='loader("expenses-content", "templates", "expenses-search", "", "", true);scroll("expenses-content");'>
+            <p class="text-white">Search Expenses</p>
+          </a>
+        </div>
+        <div class="icon">
+          <a href="#" onclick='loader("expenses-content", "templates", "expenses-search", "", "", true);scroll("expenses-content");'>
+            <i class="fa fa-book text-white"></i>
+            <i class="fa fa-search text-white"></i>
+          </a>
+        </div>
+        <a href="#" onclick='loader("expenses-content", "templates", "expenses-search", "", "", true);scroll("expenses-content");' class="small-box-footer text-white">Search Expenses <i class="fa fa-arrow-circle-right text-white"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+  <!-- /.row -->
+
+  <div id="expenses-content"></div>
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    userAccessCheck();
+    loader("expenses-content", "templates", "expenses-search", "", "", true);
+  });
+</script>

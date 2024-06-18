@@ -1,0 +1,483 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JenRx</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="dist/css/font-awesome-4.5.0.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="dist/css/ionicons-2.0.1.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- JenRx style -->
+    <link rel="stylesheet" href="dist/css/jenrx.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <!-- DataTables Buttons -->
+    <link rel="stylesheet" href="plugins/datatables/extensions/Buttons/buttons.dataTables.min.css">
+    <!-- Bootstrap datepicker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <!-- Morris charts -->
+    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <!-- PrintJS -->
+    <link rel="stylesheet" href="plugins/print/print.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body id="body" class="hold-transition skin-green sidebar-mini fixed">
+
+    <div class="wrapper">
+
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>J</b>Rx</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Jen</b>Rx</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-clipboard"></i>
+                  <span class="label licenseNotificationCount">0</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header text-center">You have <span class="licenseNotificationCount">0</span> license notification</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu licenseNotificationList">
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#" onclick='loader("page-content", "templates", "license", "", "content-wrapper", true);navigate("nav-license");'>License</a></li>
+                </ul>
+              </li>
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-hourglass-end"></i>
+                  <span class="label label-info inventoryReorderCount">0</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header text-center">You have <span class="inventoryReorderCount">0</span> inventory to reorder</li>
+                  <li>
+                    <form class="form-horizontal form-filter-list">
+                      <input type="text" id="inventoryReorderListSearch" class="form-control" placeholder="&#xF002; Search List" style="font-family: Source Sans Pro, FontAwesome">
+                    </form>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu inventoryReorderList">
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#"><span class="inventoryReorderCount">0</span> Inventory to Reorder</a></li>
+                </ul>
+              </li>
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning inventoryAboutToExpireCount">0</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header text-center">You have <span class="inventoryAboutToExpireCount">0</span> inventory about to expire</li>
+                  <li>
+                    <form class="form-horizontal form-filter-list">
+                      <input type="text" id="inventoryAboutToExpireListSearch" class="form-control" placeholder="&#xF002; Search List" style="font-family: Source Sans Pro, FontAwesome">
+                    </form>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu inventoryAboutToExpireList">
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#"><span class="inventoryAboutToExpireCount">0</span> Inventory About to Expire</a></li>
+                </ul>
+              </li>
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-flag-o"></i>
+                  <span class="label label-danger inventoryExpiredCount">0</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header text-center">You have <span class="inventoryExpiredCount">0</span> expired inventory</li>
+                  <li>
+                    <form class="form-horizontal form-filter-list">
+                      <input type="text" id="inventoryExpiredListSearch" class="form-control" placeholder="&#xF002; Search List" style="font-family: Source Sans Pro, FontAwesome">
+                    </form>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu inventoryExpiredList">
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#"><span class="inventoryExpiredCount">0</span> Expired Inventory</a></li>
+                </ul>
+              </li>
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-user fa-lg"></i>
+                  <span class="hidden-xs userUsername"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <i class="fa fa-user fa-5x img-circle text-white"></i>
+
+                    <p>
+                      <span class="userTitle"></span>
+                      <span class="userFirstname"></span>
+                      <span class="userLastname"></span>
+                      <small class="userAccess"></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="row">
+                      <div class="col-xs-4 text-center">
+                      </div>
+                      <div class="col-xs-4 text-center">
+                      </div>
+                      <div class="col-xs-4 text-center">
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" onclick='loader("page-content", "templates", "profile", "", "content-wrapper", true);navigate("nav-profile");' class="btn btn-default btn-flat"><i class="fa fa-user"></i> Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" onclick='signOut();loader("body", "templates", "sign-in", "", "hold-transition login-page", true);' class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign Out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <i class="fa fa-user fa-3x img-circle text-white"></i>
+            </div>
+            <div class="pull-left info">
+              <p class="userUsername"></p>
+              <a href="#"><i class="fa fa-circle text-success"></i> <span class="userAccess"></span></a>
+            </div>
+          </div>
+          <!-- search form -->
+          <form class="sidebar-form" id="form-search-invoice">
+            <div class="input-group">
+              <input type="text" class="form-control" name="salesIDInvoice" id="salesIDInvoice" placeholder="Search Invoice" required>
+              <span class="input-group-btn">
+                <button type="submit" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN MODULES</li>
+            <form class="sidebar-form form-filter-list">
+              <div class="input-group">
+                <input type="text" class="form-control" id="navModuleListSearch" placeholder="Search Modules" required>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+            </form>
+          </ul>
+          <ul class="sidebar-menu nav-module">
+            <li id="nav-dashboard" class="active"><a href="#" onclick='loader("page-content", "templates", "dashboard", "", "content-wrapper", true);navigate("nav-dashboard");'><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li id="nav-sales"><a href="#" onclick='loader("page-content", "templates", "sales", "", "content-wrapper", true);navigate("nav-sales");'><i class="fa fa-shopping-cart"></i> <span>Sales</span></a></li>
+            <li id="nav-accounts" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "accounts", "", "content-wrapper", true);navigate("nav-accounts");'><i class="fa fa-book"></i> <span>Accounts</span></a></li>
+            <li id="nav-backups" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "backups", "", "content-wrapper", true);navigate("nav-backups");'><i class="fa fa-server"></i> <span>Backups</span></a></li>
+            <li id="nav-customers" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "customers", "", "content-wrapper", true);navigate("nav-customers");'><i class="glyphicon glyphicon-user"></i> <span>Customers</span></a></li>
+            <li id="nav-expenses" class="admin-access pro-feature"><a href="#" onclick='loader("page-content", "templates", "expenses", "", "content-wrapper", true);navigate("nav-expenses");'><i class="fa fa-book"></i> <span>Expenses</span></a></li>
+            <li id="nav-inventory" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "inventory", "", "content-wrapper", true);navigate("nav-inventory");'><i class="fa fa-list-alt"></i> <span>Inventory</span></a></li>
+            <li id="nav-logs" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "logs", "", "content-wrapper", true);navigate("nav-logs");'><i class="fa fa-newspaper-o"></i> <span>Logs</span></a></li>
+            <li id="nav-payroll" class="admin-access pro-feature"><a href="#" onclick='loader("page-content", "templates", "payroll", "", "content-wrapper", true);navigate("nav-payroll");'><i class="fa fa-money"></i> <span>Payroll</span></a></li>
+            <li id="nav-staff" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "staff", "", "content-wrapper", true);navigate("nav-staff");'><i class="fa fa-users"></i> <span>Staff</span></a></li>
+            <li id="nav-suppliers" class="admin-access pro-feature"><a href="#" onclick='loader("page-content", "templates", "suppliers", "", "content-wrapper", true);navigate("nav-suppliers");'><i class="glyphicon glyphicon-user"></i> <span>Suppliers</span></a></li>
+            <li id="nav-profile"><a href="#" onclick='loader("page-content", "templates", "profile", "", "content-wrapper", true);navigate("nav-profile");'><i class="fa fa-user"></i> <span>Profile</span></a></li>
+            <li id="nav-settings" class="admin-access"><a href="#" onclick='loader("page-content", "templates", "settings", "", "content-wrapper", true);navigate("nav-settings");'><i class="fa fa-cogs"></i> <span>Settings</span></a></li>
+            <li id="nav-license"><a href="#" onclick='loader("page-content", "templates", "license", "", "content-wrapper", true);navigate("nav-license");'><i class="fa fa-clipboard"></i> <span>License</span></a></li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper" id="page-content"></div>
+      <div id="html-content"></div>
+      <div id="popup-content"></div>
+      <div id="py-content"></div>
+      <div id="php-content"></div>
+      <div id="speech-content"></div>
+      <div id="xh-content"></div>
+      <div id="rep-content"></div>
+      <div id="receipt-content"></div>
+      <div id="label-content"></div>
+      <div id="error-content"></div>
+      <div id="logs-content"></div>
+      <div id="backups-content"></div>
+      <div id="license-content"></div>
+
+      <!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> <span class="jenrx-version"></span>
+        </div>
+        <strong>Copyright &copy; <span class="copyright-year"></span> <a href="#" onclick="navigateURL('https://www.JenioSolutions.com/');">JenioSolutions</a> | <a href="#" onclick="navigateURL('https://www.ProSynapses.org/');">ProSynapses</a>.</strong> All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Settings tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+            <form>
+              <h3 class="control-sidebar-heading">JenRx</h3>
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Share usage report
+                  <input type="checkbox" name="ShareUsageReport" id="share-usage-report" class="pull-right" onclick="usageReport();">
+                </label>
+
+                <p>
+                  <a href="#" onclick='loader("html-content", "popup", "usage-report-policy", "", "", false);'>Usage Report Policy</a>
+                </p>
+              </div>
+              <!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  JenRx Version <span class="jenrx-version"></span>
+                </label>
+
+                <p>
+                  &copy; <span class="copyright-year"></span> <a href="#" onclick="navigateURL('https://www.JenioSolutions.com/');">JenioSolutions</a> | <a href="#" onclick="navigateURL('https://www.ProSynapses.org/');">ProSynapses</a>. <br>
+                  All rights reserved.
+                </p>
+              </div>
+              <!-- /.form-group -->
+            </form>
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+  </body>
+</html>
+<!-- jQuery 2.2.0 -->
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jQueryUI/jquery-ui-1.11.4.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/input-mask/jquery.inputmask.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- Bootstrap datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap time picker -->
+<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- CK EDITOR -->
+<script src="plugins/ckeditor/ckeditor.js"></script>
+<script src="plugins/ckeditor/adapters/jquery.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- DataTables Buttons -->
+<script src="plugins/datatables/extensions/Buttons/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables/extensions/JSZip/jszip.min.js"></script>
+<script src="plugins/datatables/extensions/PDFMake/pdfmake.min.js"></script>
+<script src="plugins/datatables/extensions/VFSFonts/vfsfonts.js"></script>
+<script src="plugins/datatables/extensions/Buttons/buttons.html5.min.js"></script>
+<script src="plugins/datatables/extensions/Buttons/buttons.print.min.js"></script>
+<script src="plugins/datatables/extensions/Buttons/buttons.colVis.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
+<!-- Slimscroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- Morris.js charts -->
+<script src="plugins/morris/raphael-min-2.1.0.js"></script>
+<script src="plugins/morris/morris.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.min.js"></script>
+<!-- PrintJS -->
+<script src="plugins/print/print.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- SQL JS -->
+<script src="dist/js/sql.js"></script>
+<!-- JenRx JS -->
+<script src="dist/js/jenrx.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    userSessionCheck();
+    var now = new Date();
+    var app = "main";
+    var version = "5.0.9";
+    $(".copyright-year").html(now.getFullYear());
+    setStorage("jenrxApp", app);
+    setStorage("jenrxVersion", version);
+    setStorage("jenrxSetup", false);
+    $(".jenrx-version").html(getStorage("jenrxVersion"));
+    if (getStorage("shareUsageReport") === null) {
+      setStorage("shareUsageReport", true);
+    }
+    $("#share-usage-report").prop("checked", $.parseJSON(getStorage("shareUsageReport")));
+    sendUsageReport("");
+    userAccessSetup();
+    if (getStorage("settingsSalesCurrency") === null) {
+      setStorage("settingsSalesCurrency", "");
+    }
+    if (getStorage("settingsSalesDiscountType") === null) {
+      setStorage("settingsSalesDiscountType", "percentage");
+    }
+    if (getStorage("settingsBackupsNumberLimit") === null) {
+      setStorage("settingsBackupsNumberLimit", 100);
+    }
+    if (getStorage("settingsInventoryExpiryNotification") === null) {
+      setStorage("settingsInventoryExpiryNotification", 3);
+    }
+    dateTime();
+    loader("py-content", "py", "settings/select/general", { title: "general" }, "", false);
+    loader("py-content", "py", 'users/select/' + getStorage("sessionUserID"), { user: getStorage("sessionUserID"), responseType: "profile" }, "", false);
+    loader("page-content", "templates", "dashboard", "", "content-wrapper", true);
+    settingsApply();
+    loader("py-content", "py", 'backups/limit/' + getStorage("settingsBackupsNumberLimit"), { number: getStorage("settingsBackupsNumberLimit") }, "", false);
+    $(".nav-module").slimScroll({
+      allowPageScroll: true,
+      alwaysVisible: true,
+      height: ($(window).height() * 0.6) + 'px',
+      width: "100%",
+      color: "#ffffff"
+    });
+    loader("py-content", "py", "license/check", "", "", false);
+    if (getStorage("settingsBusinessName") === null || getStorage("settingsBusinessEmail") === null) {
+      var response = "Complete your business and app settings";
+      var content = '<div class="row">' +
+          '<div class="form-group">' +
+              '<label for="submit" class="col-sm-12 control-label">' + response + ':</label>' +
+            '<div class="col-sm-12">' +
+              '<button class="btn btn-primary" class="close" data-dismiss="modal" onclick=\'loader("page-content", "templates", "settings", "", "content-wrapper", true);navigate("nav-settings");\'><i class="fa fa-cogs"></i> Settings</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      popupModal("Notification", content, "info", "popup-content");
+      loader("speech-content", "php", "speech", { type: "normal", text: response }, "", false);
+    }
+    if (getStorage("jenrxLatestVersion") === null) {
+      setStorage("jenrxLatestVersion", getStorage("jenrxVersion"));
+    }
+    loader("rep-content", "api-jenrx", "download", { app: getStorage("jenrxApp"), check: getStorage("jenrxVersion") }, "", false);
+    if (getStorage("jenrxLatestVersion") !== getStorage("jenrxVersion")) {
+      var response = "Kindly update to the latest version";
+      var content = '<div class="row">' +
+          '<div class="form-group">' +
+              '<label for="submit" class="col-sm-12 control-label">' + response + ':</label>' +
+            '<div class="col-sm-12">' +
+              '<button class="btn btn-primary" class="close" data-dismiss="modal" onclick=\'navigateURL(\"https://api.JenioSolutions.com/download/?app=' + getStorage("jenrxApp") + '&version=' + getStorage("jenrxLatestVersion") + '\");\'><i class="fa fa-download"></i> Download JenRx ' + getStorage("jenrxApp").toUpperCase() + ' ' + getStorage("jenrxLatestVersion") + '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      popupModal("Notification", content, "info", "popup-content");
+      loader("speech-content", "php", "speech", { type: "normal", text: response }, "", false);
+    }
+  });
+  $(".form-filter-list").submit(function(e){
+    e.preventDefault();
+  });
+  $("#inventoryExpiredListSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".inventoryExpiredList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  $("#inventoryAboutToExpireListSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".inventoryAboutToExpireList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  $("#inventoryReorderListSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".inventoryReorderList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  $("#navModuleListSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".nav-module li").filter(function() {
+      if ($(this).attr("class") == "admin-access") {
+        if (getStorage("sessionUserAccess") == "admin") {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        }
+      }
+      else {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      }
+    });
+  });
+  $("#form-search-invoice").submit(function(e){
+    e.preventDefault(e);
+    $("button").attr("disabled", "disabled");
+    loader("receipt-content", "py", 'sales/search/invoice/' + $("#salesIDInvoice").val(), $("#form-search-invoice").serializeArray(), "", false);
+  });
+</script>

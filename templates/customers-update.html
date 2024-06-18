@@ -1,0 +1,172 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Update Customers
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="glyphicon glyphicon-user active"></i><i class="fa fa-edit active"></i> Update Customers</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Update Customers</h3>
+    </div>
+    <div class="box-body">
+
+      <form id="form-customers-select" class="form-horizontal">
+        <div class="form-group">
+          <label for="customer" class="col-sm-2 control-label">Customer</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="customer" id="customer" placeholder="Search Customer" style="width: 100%;" required onchange="selectCustomer()">
+              </select>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form id="form-customers-update" class="form-horizontal">
+        <input type="hidden" class="form-control" name="customerID" id="customerID" required>
+        <input type="hidden" class="form-control" name="customerStatus" id="customerStatus" value="active" required>
+        <input type="hidden" class="form-control" name="updateType" id="updateType" value="customer" required>
+        <div class="form-group">
+          <label for="customerTitle" class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="customerTitle" id="customerTitle" placeholder="Title" required>
+                <option value="">Select a Title</option>
+                <option>Mr</option>
+                <option>Mrs</option>
+                <option>Miss</option>
+                <option>Ms.</option>
+              </select>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerFirstname" class="col-sm-2 control-label">First Name</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="customerFirstname" id="customerFirstname" placeholder="First Name" required>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerLastname" class="col-sm-2 control-label">Last Name</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="customerLastname" id="customerLastname" placeholder="Last Name" required>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerGender" class="col-sm-2 control-label">Gender</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="customerGender" id="customerGender" placeholder="Gender" required>
+                <option value="">Select a Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="unspecified">Unspecified</option>
+              </select>
+              <span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerDateofbirth" class="col-sm-2 control-label">Date of Birth</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="customerDateofbirth" id="customerDateofbirth" placeholder="Date of Birth" required>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerAddress" class="col-sm-2 control-label">Address</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="Address" required>
+              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerPhone" class="col-sm-2 control-label">Phone</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="tel" class="form-control" name="customerPhone" id="customerPhone" placeholder="Phone" required>
+              <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="customerEmail" class="col-sm-2 control-label">Email</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="email" class="form-control" name="customerEmail" id="customerEmail" placeholder="Email" required>
+              <span class="input-group-addon"><i class="fa fa-at"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Update Customer</button>
+          </div>
+        </div>
+      </form>
+      <div id="form-customers-update-loader"></div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    select2Search("customers", "form-customers-select #customer");
+    $("#form-customers-update").hide();
+    $("#form-customers-update #customerDateofbirth").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+    $("#form-customers-update").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      loader("form-customers-update-loader", "py", 'customers/update/' + $("#form-customers-update #customerID").val(), $("#form-customers-update").serializeArray(), "", true);
+    });
+  });
+  function selectCustomer() {
+    $("#form-customers-update #customerID").val($("#form-customers-select #customer").val());
+    loader("py-content", "py", 'customers/select/' + $("#form-customers-update #customerID").val(), { customer: $("#form-customers-select #customer").val() }, "", false);
+    $("#form-customers-update").show();
+  }
+  function loadFormCustomerUpdate(customers) {
+    $("#form-customers-update #customerTitle").val(customers[0].title);
+    $("#form-customers-update #customerFirstname").val(customers[0].firstname);
+    $("#form-customers-update #customerLastname").val(customers[0].lastname);
+    $("#form-customers-update #customerGender").val(customers[0].gender);
+    $("#form-customers-update #customerDateofbirth").val(customers[0].dateofbirth);
+    $("#form-customers-update #customerAddress").val(customers[0].address);
+    $("#form-customers-update #customerPhone").val(customers[0].phone);
+    $("#form-customers-update #customerEmail").val(customers[0].email);
+    $("#form-customers-update #customerStatus").val(customers[0].status);
+  }
+</script>

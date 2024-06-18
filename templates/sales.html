@@ -1,0 +1,849 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Sales
+    <small class="salesID"></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-shopping-cart active"></i> Sales</a></li>
+    <li><a href="#"><i class="fa fa-cart-plus active"></i> <span class="salesID"></span></a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-list"></i> Inventory
+            <small>Add to Cart</small>
+          </h3>
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button type="button" class="btn btn-success btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+          <!-- /. tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body pad">
+          <form id="form-add-to-cart">
+            <input type="hidden" class="form-control salesID" name="salesID" id="salesID" required>
+            <input type="hidden" class="form-control" name="salesStatus" id="salesStatus" value="pending" required>
+            <input type="hidden" class="form-control userID" name="userID" id="userID" required>
+            <div class="form-group">
+              <label for="inventory">Inventory</label>
+              <select class="form-control" name="inventory" id="inventory" placeholder="Search Inventory" style="width: 100%;" required>
+                <option value="" selected>Search Inventory</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" min="0" step="0.1" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required>
+            </div>
+            <div class="form-group clinical-feature">
+              <label for="dose">Dose <small>(mg or ml)</small></label>
+              <input type="number" min="0" step="0.001" class="form-control" name="dose" id="dose" placeholder="Dose">
+            </div>
+            <div class="form-group clinical-feature">
+              <label for="regimen">Regimen</label>
+              <select class="form-control" name="regimen" id="regimen" placeholder="Regimen" style="width: 100%;">
+                <option value="" selected>Select a Regimen</option>
+                <option value="0">When Needed</option>
+                <option value="1">One (1) Time Daily</option>
+                <option value="2">Two (2) Times Daily</option>
+                <option value="3">Three (3) Times Daily</option>
+                <option value="4">Four (4) Times Daily</option>
+                <option value="5">Five (5) Times Daily</option>
+                <option value="6">Six (6) Times Daily</option>
+                <option value="7">Seven (7) Times Daily</option>
+                <option value="8">Eight (8) Times Daily</option>
+                <option value="9">Nine (9) Times Daily</option>
+                <option value="10">Ten (10) Times Daily</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus"></i> &nbsp; Add to Cart</button>
+            </div>
+          </form>
+          <div id="form-add-to-cart-loader"></div>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-->
+    <div class="col-md-7">
+      <div class="box box-info">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-cart-plus"></i> Cart
+            <small>Cart Details</small>
+          </h3>
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+          <!-- /. tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body pad">
+          <div class="table-responsive">
+            <table id="table-cart" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Inventory</th>
+                  <th>Quantity</th>
+                  <th class="clinical-feature">Dose <small>(mg or ml)</small></th>
+                  <th class="clinical-feature">Regimen</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="cart-list">
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>Total</th>
+                  <th></th>
+                  <th class="clinical-feature"></th>
+                  <th class="clinical-feature"></th>
+                  <th></th>
+                  <th class="total"></th>
+                </tr>
+              </tfoot>
+            </table>
+            <div id="table-cart-loader"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-->
+  </div>
+  <!-- ./row -->
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="box box-danger">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-forward"></i> Complete Transaction
+            <small>Process Transaction and Print Receipt</small>
+          </h3>
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button type="button" class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+          <!-- /. tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body pad">
+          <form id="form-complete-transaction">
+            <input type="hidden" class="form-control salesID" name="salesID" id="salesID" required>
+            <input type="hidden" class="form-control" name="salesStatus" id="salesStatus" value="complete" required>
+            <input type="hidden" class="form-control userID" name="userID" id="userID" required>
+            <input type="hidden" class="form-control profit" name="profit" id="profit" required>
+            <input type="hidden" class="form-control" name="updateType" id="updateType" value="status" required>
+            <div class="form-group">
+              <label for="customer">Customer &nbsp; <button type="button" class="btn btn-success btn-sm" onclick='loader("html-content", "popup", "customers-add", "", "", false);' title="Add New Customer"><i class="glyphicon glyphicon-user text-white"></i><i class="fa fa-plus text-white"></i></button></label>
+              <select class="form-control" name="customer" id="customer" placeholder="Search Customer" style="width: 100%;">
+                <option value="" selected>Search Customer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="total">Total</label>
+              <input type="number" min="0" step="0.01" class="form-control total" name="total" id="total" placeholder="Total" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="totalDT"><h4>Total (after Discount & Tax)</h4></label>
+              <input type="number" min="0" step="0.01" class="form-control input-lg" name="totalDT" id="totalDT" placeholder="Total" readonly required>
+            </div>
+            <div class="form-group">
+              <label for="discount">
+                Discount (<span id="discountType-symbol">%</span>)
+                <select class="form-inline" name="discountType" id="discountType" placeholder="Discount Type" onchange="updateTotalDT();" required>
+                  <option value="percentage" selected>Percentage</option>
+                  <option value="amount">Amount</option>
+                </select>
+              </label>
+              <input type="number" value="0" min="0" step="0.01" class="form-control" name="discount" id="discount" placeholder="Discount" onchange="updateTotalDT();" required>
+            </div>
+            <div class="form-group">
+              <label for="paid">Paid</label>
+              <input type="number" value="0" min="0" step="0.01" class="form-control" name="paid" id="paid" placeholder="Paid" required>
+            </div>
+            <div class="form-group">
+              <label for="payment">Payment</label>
+              <select class="form-control" name="payment" id="payment" placeholder="Payment" style="width: 100%;" required>
+                <option value="">Select Payment</option>
+                <option value="cash" selected>Cash</option>
+                <option value="pos">POS</option>
+                <option value="transfer">Transfer</option>
+                <option value="cheque">Cheque</option>
+                <option value="credit">Credit</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tax">Tax (%)</label>
+              <input type="number" value="0" min="0" step="0.01" class="form-control" name="tax" id="tax" placeholder="Tax" onchange="updateTotalDT();" required>
+            </div>
+            <div class="form-group clinical-feature">
+              <label for="info">Additional Clinical Information</label>
+              <textarea class="form-control" name="info" id="info" placeholder="Additional Clinical Information" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success"><i class="fa fa-forward"></i> &nbsp; Complete Transaction and Print Receipt &nbsp; <i class="fa fa-print"></i></button>
+            </div>
+          </form>
+          <div id="form-complete-transaction-loader"></div>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-->
+    <div class="col-md-7 clinical-feature">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-medkit"></i> Clinicals
+            <small>Drug Overdose, Interactions and Treatment Guidelines</small>
+          </h3>
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button type="button" class="btn btn-primary btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+          <!-- /. tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body pad">
+          <div class="clinical-box">
+            <div id="drug-overdose-loader"></div>
+            <div id="drug-overdose-popup"></div>
+            <div id="drug-interactions-loader"></div>
+            <div id="drug-interactions-popup"></div>
+            <div id="search-treatment-guidelines-loader"></div>
+          </div>
+        </div>
+        <div class="box-footer">
+          Powered by <a href="#" onclick="navigateURL('https://www.ProSynapses.org/');">ProSynapses</a>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-->
+  </div>
+  <!-- ./row -->
+
+  <div id="sales-receipt-loader"></div>
+  <div id="sales-label-loader"></div>
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    select2Search("inventory", "form-add-to-cart #inventory");
+    select2Search("customers", "form-complete-transaction #customer");
+    $("#form-complete-transaction #info").ckeditor(scroll("form-add-to-cart"));
+    $("#table-cart").DataTable();
+    salesSetup(Date.now());
+    updateTotalDT();
+    $(".table-responsive").slimScroll({
+      allowPageScroll: true,
+      alwaysVisible: true,
+      height: '338.5px',
+      width: '100%'
+    });
+    $(".clinical-box").slimScroll({
+      allowPageScroll: true,
+      alwaysVisible: true,
+      height: '896px',
+      width: '100%'
+    });
+    $("#form-add-to-cart").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      loader("form-add-to-cart-loader", "py", "sales/cart/add", $("#form-add-to-cart").serializeArray(), "", true);
+    });
+    $("#form-complete-transaction").submit(function(e){
+      e.preventDefault(e);
+      var paid = parseFloat($("#form-complete-transaction #paid").val());
+      var totalDT = parseFloat($("#form-complete-transaction #totalDT").val());
+      if (paid >= totalDT || $("#form-complete-transaction #payment").val() === "credit") {
+        if ($("#form-complete-transaction #discountType").val() == "amount") {
+          var discount = (parseFloat($("#form-complete-transaction #discount").val()) / parseFloat($(".total").val())) * 100;
+          discount = discount.toFixed(2);
+          $("#form-complete-transaction #discountType").val("percentage");
+          $("#form-complete-transaction #discount").val(discount);
+        }
+        $("button").attr("disabled", "disabled");
+        loader("form-complete-transaction-loader", "py", 'sales/complete/' + $("#form-complete-transaction #salesID").val(), $("#form-complete-transaction").serializeArray(), "", true);
+      }
+      else {
+        xhr = {};
+        xhr.statusText = "Error";
+        xhr.responseText = 'Insufficient Amount Paid <br>' + getStorage("settingsSalesCurrency") + paid.toFixed(2) + ' is less than ' + getStorage("settingsSalesCurrency") + totalDT.toFixed(2);
+        errorHandler(xhr, "form-complete-transaction-loader");
+      }
+    });
+  });
+  function loadTableCartList(data) {
+    var cart_list = "";
+    var id = 1;
+    var total = 0;
+    var profit = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].cart_id) {
+        var remove = '<button type="button" class="btn btn-danger btn-xs" title="Remove from Cart" onclick="removeFromCart(' + data[i].cart_id + ');"><i class="fa fa-minus"></i></button>';
+        var cart_data = {
+          updateType: "",
+          salesID: data[i].sales_id,
+          cartID: data[i].cart_id,
+          inventory: data[i].inventory_id,
+          quantity: data[i].cart_quantity,
+          dose: data[i].dose,
+          regimen: data[i].regimen,
+          label: data[i].label.replace(/'/g, "&#39;").replace(/"/g, "&#39;&#39;")
+        }
+        cart_data.updateType = "label";
+        var label = '<button type="button" class="btn btn-info btn-xs clinical-feature" title="Inventory Label" onclick=\'updateCart(' + JSON.stringify(JSON.stringify(cart_data)) + ');\'><i class="fa fa-sticky-note"></i></button>';
+        cart_data.updateType = "quantity";
+        var quantity = '<input type="number" min="0" step="0.1" value="' + data[i].cart_quantity + '" class="form-control" name="quantity" id="quantity-' + data[i].cart_id + '" placeholder="Quantity" style="width: 100%;" required onchange=\'updateCart(' + JSON.stringify(JSON.stringify(cart_data)) + ');\'>';
+        cart_data.updateType = "dose";
+        var dose = '<input type="number" min="0" step="0.001" value="' + data[i].dose + '" class="form-control" name="dose" id="dose-' + data[i].cart_id + '" placeholder="Dose" style="width: 100%;" onchange=\'updateCart(' + JSON.stringify(JSON.stringify(cart_data)) + ');\'>';
+        cart_data.updateType = "regimen";
+        var regimen = '<select class="form-control" name="regimen" id="regimen-' + data[i].cart_id + '" placeholder="Regimen" style="width: 100%;" onchange=\'updateCart(' + JSON.stringify(JSON.stringify(cart_data)) + ');\'>';
+        if (data[i].regimen == "") {
+          regimen = regimen + '<option value="" selected>Select a Regimen</option>';
+        }
+        else {
+          regimen = regimen + '<option value="">Select a Regimen</option>';
+        }
+        if (data[i].regimen == "0") {
+          regimen = regimen + '<option value="0" selected>When Needed</option>';
+        }
+        else {
+          regimen = regimen + '<option value="0">When Needed</option>';
+        }
+        if (data[i].regimen == "1") {
+          regimen = regimen + '<option value="1" selected>One (1) Time Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="1">One (1) Time Daily</option>';
+        }
+        if (data[i].regimen == "2") {
+          regimen = regimen + '<option value="2" selected>Two (2) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="2">Two (2) Times Daily</option>';
+        }
+        if (data[i].regimen == "3") {
+          regimen = regimen + '<option value="3" selected>Three (3) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="3">Three (3) Times Daily</option>';
+        }
+        if (data[i].regimen == "4") {
+          regimen = regimen + '<option value="4" selected>Four (4) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="4">Four (4) Times Daily</option>';
+        }
+        if (data[i].regimen == "5") {
+          regimen = regimen + '<option value="5" selected>Five (5) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="5">Five (5) Times Daily</option>';
+        }
+        if (data[i].regimen == "6") {
+          regimen = regimen + '<option value="6" selected>Six (6) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="6">Six (6) Times Daily</option>';
+        }
+        if (data[i].regimen == "7") {
+          regimen = regimen + '<option value="7" selected>Seven (7) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="7">Seven (7) Times Daily</option>';
+        }
+        if (data[i].regimen == "8") {
+          regimen = regimen + '<option value="8" selected>Eight (8) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="8">Eight (8) Times Daily</option>';
+        }
+        if (data[i].regimen == "9") {
+          regimen = regimen + '<option value="9" selected>Nine (9) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="9">Nine (9) Times Daily</option>';
+        }
+        if (data[i].regimen == "10") {
+          regimen = regimen + '<option value="10" selected>Ten (10) Times Daily</option>';
+        }
+        else {
+          regimen = regimen + '<option value="10">Ten (10) Times Daily</option>';
+        }
+        regimen = regimen + '</select>';
+        cart_list = cart_list + '<tr>' +
+            '<td>' + remove + id + '</td>' +
+            '<td>' + label + data[i].name + '</td>' +
+            '<td>' + quantity + '</td>' +
+            '<td class="clinical-feature">' + dose + '</td>' +
+            '<td class="clinical-feature">' + regimen + '</td>' +
+            '<td>' + data[i].price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + data[i].cart_total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+          '</tr>';
+        id++;
+        total = total + data[i].cart_total;
+        profit = profit + data[i].cart_profit;
+      }
+    }
+    $("#table-cart").DataTable().destroy();
+    $("#cart-list").html(cart_list);
+    $(".total").html(getStorage("settingsSalesCurrency") + total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+    $(".total").val(total.toFixed(2));
+    $(".profit").val(profit.toFixed(2));
+    $("#table-cart").DataTable().draw();
+    $("#table-cart").DataTable().column(3).visible($.parseJSON(getStorage("settingsAppClinicalFeature")));
+    $("#table-cart").DataTable().column(4).visible($.parseJSON(getStorage("settingsAppClinicalFeature")));
+    settingsApply();
+    updateTotalDT();
+    if ($.parseJSON(getStorage("settingsAppClinicalFeature")) == true && $.parseJSON(getStorage("jenrxLicense")) == true) {
+      if (data) {
+        checkOD(data);
+        checkDDI(data);
+        searchSTG(data);
+      }
+      else {
+        $("#drug-overdose-loader").html("");
+        $("#drug-overdose-popup").html("");
+        $("#drug-interactions-loader").html("");
+        $("#drug-interactions-popup").html("");
+        $("#search-treatment-guidelines-loader").html("");
+      }
+    }
+    else {
+      if ($.parseJSON(getStorage("jenrxLicense")) != true) {
+        loader("search-treatment-guidelines-loader", "templates", "license-jenrx-pro", "", "", true);
+      }
+    }
+  }
+  function removeFromCart(cartID) {
+    $("button").attr("disabled", "disabled");
+    loader("table-cart-loader", "py", 'sales/cart/remove/' + cartID, { salesID: $("#form-add-to-cart #salesID").val(), cartID: cartID }, "", true);
+  }
+  function updateCart(cart_data) {
+    cart_data = $.parseJSON(cart_data);
+    if (cart_data.updateType == "quantity") {
+      cart_data.quantity = $('#quantity-' + cart_data.cartID).val();
+    }
+    else if (cart_data.updateType == "dose") {
+      cart_data.dose = $('#dose-' + cart_data.cartID ).val();
+    }
+    else if (cart_data.updateType == "regimen") {
+      cart_data.regimen = $('#regimen-' + cart_data.cartID).val();
+    }
+    else if (cart_data.updateType == "label") {
+      loader("sales-label-loader", "popup", "sales-label-update", "", "", false);
+      return (setTimeout(function() { loadFormInventoryLabel(cart_data); }, 1000));
+    }
+    else {
+
+    }
+    $("button").attr("disabled", "disabled");
+    loader("table-cart-loader", "py", 'sales/cart/update/' + cart_data.cartID, cart_data, "", true);
+  }
+  function updateTotalDT() {
+    var discountTypeSymbol = "";
+    var totalD = 0;
+    var totalDT = 0;
+    if ($("#form-complete-transaction #discountType").val() == "percentage") {
+      discountTypeSymbol = "%";
+      totalD = ((100 - parseFloat($("#form-complete-transaction #discount").val())) / 100) * parseFloat($(".total").val());
+    }
+    else if ($("#form-complete-transaction #discountType").val() == "amount") {
+      discountTypeSymbol = getStorage("settingsSalesCurrency");
+      totalD = parseFloat($(".total").val()) - parseFloat($("#form-complete-transaction #discount").val());
+    }
+    else {
+
+    }
+    if (getStorage("settingsSalesTaxType") == "exclusive") {
+      var totalDT = ((100 + parseFloat($("#form-complete-transaction #tax").val())) / 100) * totalD;
+    }
+    else {
+      var totalDT = totalD;
+    }
+    $("#discountType-symbol").html(discountTypeSymbol);
+    $("#form-complete-transaction #totalDT").val(totalDT.toFixed(2));
+  }
+  function checkOD(data) {
+    var oddata = Array();
+    var j = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].cart_id) {
+        if (data[i].apis) {
+          var od = data[i].apis.split(",");
+          for (var k = 0; k < od.length; k++) {
+            oddata[j] = Array();
+            oddata[j].name = data[i].name;
+            oddata[j].value = od[k];
+            if (data[i].dose) {
+              var single_dose = parseFloat(data[i].dose);
+              var daily_dose = parseFloat(data[i].dose) * parseFloat(data[i].regimen);
+            }
+            else {
+              var single_dose = 0;
+              var daily_dose = 0;
+            }
+            oddata[j].single_dose = single_dose;
+            oddata[j].daily_dose = daily_dose;
+            j++;
+          }
+        }
+      }
+    }
+    if (oddata) {
+      loader("drug-overdose-loader", "db", "checkOD", oddata, "", true);
+    }
+    else {
+      $("#drug-overdose-loader").html("");
+      $("#drug-overdose-popup").html("");
+    }
+  }
+  function checkDDI(data) {
+    var ddidata = Array();
+    var j = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].cart_id) {
+        if (data[i].apis) {
+          var ddi = data[i].apis.split(",");
+          for (var k = 0; k < ddi.length; k++) {
+            ddidata[j] = Array();
+            ddidata[j].name = data[i].name;
+            ddidata[j].value = ddi[k];
+            j++;
+          }
+        }
+      }
+    }
+    if (ddidata) {
+      loader("drug-interactions-loader", "db", "checkDDI", ddidata, "", true);
+    }
+    else {
+      $("#drug-interactions-loader").html("");
+      $("#drug-interactions-popup").html("");
+    }
+  }
+  function searchSTG(data) {
+    var stgdata = Array();
+    var api = "";
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].cart_id) {
+        if (data[i].apis) {
+          if (api != "") {
+            api = api + ",";
+          }
+          api = api + data[i].apis;
+        }
+      }
+    }
+    stgdata.push({
+      value: api,
+      type: "any"
+    });
+    if (api) {
+      loader("search-treatment-guidelines-loader", "db", "searchSTG", stgdata, "", true);
+    }
+    else {
+      $("#search-treatment-guidelines-loader").html("");
+    }
+  }
+  function loadODResults(data, oddata) {
+    var drugs_list = '';
+    var drugs = data;
+    for (var i = 0; i < drugs.length; i++) {
+      drugs_list = drugs_list + drugs[i].name + ' (' + drugs[i].value + ')' + ',';
+    }
+    drugs_list = convertToList(drugs_list, "Drug / Drug Class");
+    if (oddata.length > 0) {
+      popupModal("Potential Drug Overdose Found!", oddata.length + ' Potential Drug Overdose Found!' + drugs_list, "error", "drug-overdose-popup");
+      var flat_alert = flatAlert("Potential Drug Overdose Found!", oddata.length + ' Potential Drug Overdose Found!' + drugs_list, "error", false);
+      var oddata_result_list = "";
+      for (var i = 0; i < oddata.length; i++) {
+        oddata_result_list = oddata_result_list + '<li>' + oddata[i] + '</li>';
+      }
+      var oddata_result = '<h2 class="page-header">Potential Drug Overdose</h2>' +
+                              '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                  '<div class="nav-tabs-custom">' +
+                                    '<ul class="nav nav-tabs pull-right">' +
+                                      '<li class="active"><a href="#tab_drugs_0" data-toggle="tab">Potential Drug Interactions</a></li>' +
+                                      '<li class="pull-left header"><i class="fa fa-th"></i> </li>' +
+                                    '</ul>' +
+                                    '<div class="tab-content">' +
+                                      '<div class="tab-pane active" id="tab_1-1">' +
+                                        oddata_result_list +
+                                      '</div>' +
+                                    '</div>' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>';
+    }
+    else {
+      var flat_alert = flatAlert("No Drug Overdose Found!", oddata.length + ' Potential Drug Overdose Found!' + drugs_list, "success", false);
+      var oddata_result = '';
+    }
+    $("#drug-overdose-loader").html(flat_alert + oddata_result);
+  }
+  function loadDDIResults(data, ddidata, ddilist, diidata) {
+    var drugs_list = '';
+    var drugs = data;
+    for (var i = 0; i < drugs.length; i++) {
+      drugs_list = drugs_list + drugs[i].name + ' (' + drugs[i].value + ')' + ',';
+    }
+    drugs_list = convertToList(drugs_list, "Drug / Drug Class");
+    if (ddidata.length > 0) {
+      popupModal("Potential Drug Interactions Found!", ddidata.length + ' Potential Drug Interactions Found!' + drugs_list, "error", "drug-interactions-popup");
+      var flat_alert = flatAlert("Potential Drug Interactions Found!", ddidata.length + ' Potential Drug Interactions Found!' + drugs_list, "error", false);
+      var ddidata_result_list = "";
+      for (var i = 0; i < ddidata.length; i++) {
+        ddidata_result_list = ddidata_result_list + '<li>' + ddidata[i] + '</li>';
+      }
+      var ddidata_result = '<h2 class="page-header">Potential Drug Interactions</h2>' +
+                              '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                  '<div class="nav-tabs-custom">' +
+                                    '<ul class="nav nav-tabs pull-right">' +
+                                      '<li class="active"><a href="#tab_drugs_0" data-toggle="tab">Potential Drug Interactions</a></li>' +
+                                      '<li class="pull-left header"><i class="fa fa-th"></i> </li>' +
+                                    '</ul>' +
+                                    '<div class="tab-content">' +
+                                      '<div class="tab-pane active" id="tab_1-1">' +
+                                        ddidata_result_list +
+                                      '</div>' +
+                                    '</div>' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>';
+    }
+    else {
+      var flat_alert = flatAlert("No Drug Interactions Found!", ddidata.length + ' Potential Drug Interactions Found!' + drugs_list, "success", false);
+      var ddidata_result = '';
+    }
+    var ddilist_result_list = "";
+    for (var i = 0; i < ddilist.length; i++) {
+      var collapse_in = "";
+      if (i == 0) {
+        collapse_in = "";
+      }
+      ddilist_result_list = ddilist_result_list + '<div class="panel box box-danger">' +
+                                                    '<div class="box-header with-border">' +
+                                                      '<h4 class="box-title">' +
+                                                        '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '">' +
+                                                          ddilist[i].drug.toUpperCase() +
+                                                        '</a>' +
+                                                      '</h4>' +
+                                                    '</div>' +
+                                                    '<div id="collapse' + i + '" class="panel-collapse collapse ' + collapse_in + '">' +
+                                                      '<div class="box-body">' +
+                                                        convertToList(ddilist[i].ddi, "Possible Drug Interactions") +
+                                                      '</div>' +
+                                                    '</div>' +
+                                                  '</div>';
+    }
+    var ddilist_result = '<h2 class="page-header">Possible Drug Interactions</h2>' +
+                            '<div class="row">' +
+                              '<div class="col-md-12">' +
+                                '<div class="box box-solid">' +
+                                  '<div class="box-header with-border">' +
+                                    '<h3 class="box-title"><i class="fa fa-th"></i></h3>' +
+                                  '</div>' +
+                                  '<div class="box-body">' +
+                                    '<div class="box-group" id="accordion">' +
+                                      ddilist_result_list +
+                                    '</div>' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>' +
+                            '</div>';
+    var diilist_result_list = "";
+    for (var i = 0; i < diidata.length; i++) {
+      var collapse_in = "";
+      if (i == 0) {
+        collapse_in = "in";
+      }
+      if (diidata[i].severity == "minor") {
+        var severity_class_box = "box-info";
+        var severity_class_btn = "btn-info";
+      }
+      else if (diidata[i].severity == "moderate") {
+        var severity_class_box = "box-warning";
+        var severity_class_btn = "btn-warning";
+      }
+      else if (diidata[i].severity == "major") {
+        var severity_class_box = "box-danger";
+        var severity_class_btn = "btn-danger";
+      }
+      else {
+        var severity_class_box = "box-default";
+        var severity_class_btn = "btn-default";
+      }
+      diilist_result_list = diilist_result_list + '<div class="panel box ' + severity_class_box + '">' +
+                                                    '<div class="box-header with-border">' +
+                                                      '<h4 class="box-title">' +
+                                                        '<a data-toggle="collapse" data-parent="#accordiondii" href="#collapsedii' + i + '">' +
+                                                          diidata[i].title.toUpperCase() +
+                                                          ' <button type="button" class="btn ' + severity_class_btn + ' btn-xs">' + diidata[i].severity.toUpperCase() + '</button>' +
+                                                        '</a>' +
+                                                      '</h4>' +
+                                                    '</div>' +
+                                                    '<div id="collapsedii' + i + '" class="panel-collapse collapse ' + collapse_in + '">' +
+                                                      '<div class="box-body">' +
+                                                        diidata[i].information +
+                                                      '</div>' +
+                                                    '</div>' +
+                                                  '</div>';
+    }
+    var diilist_result = '<h2 class="page-header">Drug Interactions Information</h2>' +
+                            '<div class="row">' +
+                              '<div class="col-md-12">' +
+                                '<div class="box box-solid">' +
+                                  '<div class="box-header with-border">' +
+                                    '<h3 class="box-title"><i class="fa fa-th"></i></h3>' +
+                                  '</div>' +
+                                  '<div class="box-body">' +
+                                    '<div class="box-group" id="accordiondii">' +
+                                      diilist_result_list +
+                                    '</div>' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>' +
+                            '</div>';
+    $("#drug-interactions-loader").html(flat_alert + ddidata_result + diilist_result + ddilist_result);
+  }
+  function convertToList(data, title) {
+    var arr = data.split(",");
+    arr.sort(function (a, b) {
+      return a.localeCompare(b);
+    });
+    var list = '<ul class="list-unstyled"><li><b>' + title + '</b><ul>';
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] != " " && arr[i] != null && arr[i].length > 0) {
+        list = list + '<li>' + arr[i] + '</li>';
+      }
+    }
+    list = list + '</ul></li></ul>';
+    return list;
+  }
+  function loadSTGSearchResults(stgdata, data, i) {
+    if (i == 0 || data[0].type == "all") {
+      $("#search-treatment-guidelines-loader").html("");
+    }
+    var stgdata_result = "";
+    var data_ = data[0].value;
+    var split_data = data_.split(",");
+    var data_list = '<ul class="list-unstyled"><li><b><i class="fa fa-search-plus"></i> Search Summary</b><ul>';
+    var data_list_ = "";
+    if (data[0].type == "all") {
+      for (var j = 0; j < split_data.length; j++) {
+        data_list_ = data_list_ + '<li><b>' + split_data[j] + '</b></li>';
+      }
+    }
+    else {
+      data_list_ = data_list_ + '<li><b>' + split_data[i] + '</b></li>';
+    }
+    data_list = data_list + data_list_ + '</ul></li></ul>';
+    if (stgdata.length < 1) {
+      var flat_alert = flatAlert("Treatment Guidelines", 'No Treatment Guidelines Found containing Keyword: ' + data_list, "error", false);
+      if (data[0].type == "all") {
+        var flat_alert = flatAlert("Treatment Guidelines", 'No Treatment Guidelines Found containing Keyword: ' + data_list, "error", false);
+      }
+    }
+    else {
+      var flat_alert = flatAlert("Treatment Guidelines", 'Treatment Guidelines Found containing Keyword: ' + data_list, "success", false);
+      if (data[0].type == "all") {
+        var flat_alert = flatAlert("Treatment Guidelines", 'Treatment Guidelines Found containing Keyword: ' + data_list, "success", false);
+      }
+      var stgdata_result = compileSTGTabs(stgdata, "search", i);
+      for (var i = 0; i < split_data.length; i++) {
+        var data__ = split_data[i];
+        var regex_search = new RegExp(data__, "ig");
+        stgdata_result = stgdata_result.replace(regex_search, '<code>' + data__.toUpperCase() + '</code>');
+      }
+    }
+    $("#search-treatment-guidelines-loader").html($("#search-treatment-guidelines-loader").html() + flat_alert + stgdata_result);
+  }
+  function compileSTGTabs(stgdata, type, num) {
+    var stgdata_result = "";
+    for (var i = 0; i < stgdata[0].values.length; i++) {
+      stgdata_result = stgdata_result + '<h2 class="page-header">' + stgdata[0].values[i][1] + '</h2>' +
+                              '<div class="row">' +
+                                '<div class="col-md-12">' +
+                                  '<div class="nav-tabs-custom">' +
+                                    '<ul class="nav nav-tabs">' +
+                                      '<li class=""><a href="#tab_introduction_' + type + '_' + num + '_' + i + '" data-toggle="tab">Introduction</a></li>' +
+                                      '<li class=""><a href="#tab_disease_classification_' + type + '_' + num + '_' + i + '" data-toggle="tab">Classification</a></li>' +
+                                      '<li class=""><a href="#tab_clinical_features_' + type + '_' + num + '_' + i + '" data-toggle="tab">Clinical Features</a></li>' +
+                                      '<li class=""><a href="#tab_differential_diagnoses_' + type + '_' + num + '_' + i + '" data-toggle="tab">Differential Diagnoses</a></li>' +
+                                      '<li class=""><a href="#tab_complications_' + type + '_' + num + '_' + i + '" data-toggle="tab">Complications</a></li>' +
+                                      '<li class=""><a href="#tab_investigations_' + type + '_' + num + '_' + i + '" data-toggle="tab">Investigations</a></li>' +
+                                      '<li class=""><a href="#tab_treatment_objectives_' + type + '_' + num + '_' + i + '" data-toggle="tab">Treatment Objectives</a></li>' +
+                                      '<li class="active"><a href="#tab_drug_treatment_' + type + '_' + num + '_' + i + '" data-toggle="tab">Drug Treatment</a></li>' +
+                                      '<li class=""><a href="#tab_nondrug_treatment_' + type + '_' + num + '_' + i + '" data-toggle="tab">Non-drug Treatment</a></li>' +
+                                      '<li class=""><a href="#tab_adr_caution_' + type + '_' + num + '_' + i + '" data-toggle="tab">ADR / Caution</a></li>' +
+                                      '<li class=""><a href="#tab_prevention_' + type + '_' + num + '_' + i + '" data-toggle="tab">Prevention</a></li>' +
+                                      '<li class="pull-right header"><i class="fa fa-th"></i> ' + stgdata[0].values[i][1] + '</li>' +
+                                    '</ul>' +
+                                    '<div class="tab-content">' +
+                                      '<div class="tab-pane" id="tab_introduction_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][2].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_disease_classification_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][0].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_clinical_features_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][3].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_differential_diagnoses_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][4].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_complications_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][5].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_investigations_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][6].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_treatment_objectives_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][7].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane active" id="tab_drug_treatment_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][8].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_nondrug_treatment_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][9].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_adr_caution_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][10].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                      '<div class="tab-pane" id="tab_prevention_' + type + '_' + num + '_' + i + '">' +
+                                        stgdata[0].values[i][11].replace(/\r\n/g,'<br>') +
+                                      '</div>' +
+                                    '</div>' +
+                                  '</div>' +
+                                '</div>' +
+                              '</div>';
+    }
+    return stgdata_result;
+  }
+</script>

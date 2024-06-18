@@ -1,0 +1,180 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Inventory List
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-list-alt active"></i><i class="fa fa-list active"></i> Inventory List</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Inventory List</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#inventory-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-flat col-md-4 col-sm-4" onclick='inventoryList("active");'>All</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-4 col-sm-4" onclick='inventoryList("reorder");'>Reorder</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-4 col-sm-4" onclick='inventoryList("abouttoexpire");'>About to Expire</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='inventoryList("expired");'>Expired</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='inventoryList("inactive");'>Inactive</button>
+          <br><br><br><br><br>
+          <button type="button" class="btn btn-class btn-lg btn-flat col-md-6 col-sm-6">Total Cost Price Value: <span id="inventory-list-cost-price-total"></span></button>
+          <button type="button" class="btn btn-class btn-lg btn-flat col-md-6 col-sm-6">Total Selling Price Value: <span id="inventory-list-selling-price-total"></span></button>
+          <br><br><br>
+        </div>
+      </div>
+      <div class="col-md-12 table-responsive" id="inventory-list-result">
+        <table id="table-inventory-list" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Packaging</th>
+              <th>Cost Price</th>
+              <th>Selling Price</th>
+              <th>Cost Price Value</th>
+              <th>Selling Price Value</th>
+              <th>Reorder Level</th>
+              <th>Barcode</th>
+              <th>Expiry Date</th>
+              <th class="clinical-feature">APIs</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-list-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Packaging</th>
+              <th>Cost Price</th>
+              <th>Selling Price</th>
+              <th>Cost Price Value</th>
+              <th>Selling Price Value</th>
+              <th>Reorder Level</th>
+              <th>Barcode</th>
+              <th>Expiry Date</th>
+              <th class="clinical-feature">APIs</th>
+              <th>Dates</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-inventory-list-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#inventory-list-result").hide();
+    inventoryList("active");
+  });
+  function inventoryList(status) {
+    $(".btn-class").removeClass("btn-success");
+    $(".btn-class").removeClass("btn-info");
+    $(".btn-class").removeClass("btn-warning");
+    $(".btn-class").removeClass("btn-danger");
+    $(".btn-class").removeClass("btn-black");
+    if (status == "active") {
+      $(".btn-class").addClass("btn-success");
+      loader("table-inventory-list-loader", "py", 'inventory/list/' + status, { status: status }, "", true);
+    }
+    else if (status == "inactive") {
+      $(".btn-class").addClass("btn-black");
+      loader("table-inventory-list-loader", "py", 'inventory/list/' + status, { status: status }, "", true);
+    }
+    else if (status == "reorder") {
+      $(".btn-class").addClass("btn-info");
+      loader("py-content", "py", "inventory/query", { queryType: "inventoryQueryReorder", queryData: "", responseType: "list" }, "", false);
+    }
+    else if (status == "abouttoexpire") {
+      $(".btn-class").addClass("btn-warning");
+      loader("py-content", "py", "inventory/query", { queryType: "inventoryQueryAboutToExpire", queryData: getStorage("settingsInventoryExpiryNotification"), responseType: "list" }, "", false);
+    }
+    else if (status == "expired") {
+      $(".btn-class").addClass("btn-danger");
+      loader("py-content", "py", "inventory/query", { queryType: "inventoryQueryExpired", queryData: "", responseType: "list" }, "", false);
+    }
+    else {
+    }
+  }
+  function loadTableInventoryList(status, data) {
+    var inventory_list = "";
+    var id = 1;
+    var total_cost_price_ = 0;
+    var total_selling_price_ = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].inventory_id) {
+        if (status == "active" || status == "reorder" || status == "abouttoexpire" || status == "expired") {
+          var inactivate_inventory = '<button type="button" class="btn btn-danger btn-xs" title="Inactivate Customer" onclick="inactivateInventory(' + data[i].inventory_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_inventory = '<button type="button" class="btn btn-info btn-xs" title="Update Customer" onclick="updateInventory(' + data[i].inventory_id + ');"><i class="fa fa-edit"></i></button>';
+        }
+        else {
+          var inactivate_inventory = '<button type="button" class="btn btn-black btn-xs" title="Reactivate Customer" onclick="reactivateInventory(' + data[i].inventory_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_inventory = "";
+        }
+        var dates = '<button type="button" class="btn btn-primary btn-xs">Created: ' + data[i].created + '</button><button type="button" class="btn btn-info btn-xs">Updated: ' + data[i].updated + '</button>';
+        var total_cost_price = data[i].costprice * data[i].quantity;
+        var total_selling_price = data[i].sellingprice * data[i].quantity;
+        inventory_list = inventory_list + '<tr>' +
+            '<td>' + inactivate_inventory + update_inventory + id + '</td>' +
+            '<td>' + data[i].name + '</td>' +
+            '<td>' + data[i].quantity + '</td>' +
+            '<td>' + data[i].packaging + '</td>' +
+            '<td>' + data[i].costprice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + data[i].sellingprice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + total_cost_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + total_selling_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + data[i].reorderlevel + '</td>' +
+            '<td>' + data[i].barcode + '</td>' +
+            '<td>' + data[i].expirydate + '</td>' +
+            '<td>' + data[i].apis + '</td>' +
+            '<td>' + dates + '</td>' +
+          '</tr>';
+        id++;
+        total_cost_price_ = total_cost_price_ + total_cost_price;
+        total_selling_price_ = total_selling_price_ + total_selling_price;
+      }
+    }
+    $("#table-inventory-list").DataTable().destroy();
+    $("#table-inventory-list-loader").html("");
+    $("#inventory-list-list").html(inventory_list);
+    $("#inventory-list-cost-price-total").html(getStorage("settingsSalesCurrency") + total_cost_price_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+    $("#inventory-list-selling-price-total").html(getStorage("settingsSalesCurrency") + total_selling_price_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+    var titleAttr = 'Inventory List - ' + status.toUpperCase() + ' - ' + new Date() + '\n' + ' Total Cost Price Value ' + $("#inventory-list-cost-price-total").html() + ' Total Selling Price Value ' + $("#inventory-list-selling-price-total").html();
+    dataTablesButtons("table-inventory-list", titleAttr);
+    $("#table-inventory-list").DataTable().column(11).visible($.parseJSON(getStorage("settingsAppClinicalFeature")));
+    $("#inventory-list-result").show();
+  }
+  function inactivateInventory(inventory) {
+    loader("html-content", "popup", "inventory-inactivate", "", "", false);
+    setTimeout(function() { $("#form-inventory-select #inventory").append(new Option("Inactivate Inventory", inventory, true, true)).trigger('change'); }, 1000);
+  }
+  function updateInventory(inventory) {
+    loader("html-content", "popup", "inventory-update", "", "", false);
+    setTimeout(function() { $("#form-inventory-select #inventory").append(new Option("Update Inventory", inventory, true, true)).trigger('change'); }, 1000);
+  }
+  function reactivateInventory(inventory) {
+    loader("html-content", "popup", "inventory-reactivate", "", "", false);
+    setTimeout(function() { $("#form-inventory-select #inventory").append(new Option("Reactivate Inventory", inventory, true, true)).trigger('change'); }, 1000);
+  }
+</script>

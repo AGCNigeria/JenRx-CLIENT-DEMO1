@@ -1,0 +1,126 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Add Expenses
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i><i class="fa fa-plus active"></i> Add Expenses</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Add Expense</h3>
+    </div>
+    <div class="box-body">
+
+      <form id="form-expenses-insert" class="form-horizontal">
+        <input type="hidden" class="form-control userID" name="userID" id="userID" required>
+        <div class="form-group">
+          <label for="expenseType" class="col-sm-2 control-label">Type</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="expenseType" id="expenseType" placeholder="Type" required onchange="expenseTypeFunc();">
+                <option value="">Select an Expense Type</option>
+                <option>ICT</option>
+                <option>Insurance</option>
+                <option>Lease</option>
+                <option>Maintenance</option>
+                <option>Mortgage</option>
+                <option>Office Supplies</option>
+                <option>Rent</option>
+                <option>Transportation</option>
+                <option>Utilities</option>
+                <option>Others</option>
+              </select>
+              <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group expense-type-others">
+          <label for="expenseTypeOthers" class="col-sm-2 control-label">Others</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="expenseTypeOthers" id="expenseTypeOthers" placeholder="Type">
+              <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseTitle" class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="expenseTitle" id="expenseTitle" placeholder="Title" required>
+              <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseAmount" class="col-sm-2 control-label">Amount</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.01" class="form-control" name="expenseAmount" id="expenseAmount" placeholder="Amount" required>
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseDetails" class="col-sm-2 control-label">Details</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <textarea class="form-control" name="expenseDetails" id="expenseDetails" placeholder="Details" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Add Expense</button>
+          </div>
+        </div>
+      </form>
+      <div id="form-expenses-insert-loader"></div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#form-expenses-insert .userID").val(getStorage("sessionUserID"));
+    $(".expense-type-others").hide();
+    $("#form-expenses-insert #expenseDetails").ckeditor(scroll("form-expenses-insert"));
+    $("#form-expenses-insert").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      if ($("#form-expenses-insert #expenseType").val() == "Others") {
+        var expenseType = $("#form-expenses-insert #expenseTypeOthers").val();
+      }
+      else {
+        var expenseType = $("#form-expenses-insert #expenseType").val();
+      }
+      loader("form-expenses-insert-loader", "py", "expenses/insert", { userID: $("#form-expenses-insert #userID").val(), expenseType: expenseType, expenseTitle: $("#form-expenses-insert #expenseTitle").val(), expenseAmount: $("#form-expenses-insert #expenseAmount").val(), expenseDetails: $("#form-expenses-insert #expenseDetails").val() }, "", true);
+    });
+  });
+  function expenseTypeFunc() {
+    if ($("#form-expenses-insert #expenseType").val() == "Others") {
+      $(".expense-type-others").show();
+      $("#form-expenses-insert #expenseTypeOthers").attr("required", "required");
+    }
+    else {
+      $(".expense-type-others").hide();
+      $("#form-expenses-insert #expenseTypeOthers").removeAttr("required");
+    }
+  }
+</script>

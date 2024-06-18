@@ -1,0 +1,227 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Profile
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-user active"></i> Profile</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-3">
+
+      <!-- Profile Image -->
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+          <center>
+            <i class="fa fa-user fa-5x img-responsive img-circle"></i>
+          </center>
+
+          <h3 class="text-center"><span class="userTitle"></span> <span class="userFirstname"></span> <span class="userLastname"></span></h3>
+
+          <p class="text-muted text-center userAccess"></p>
+
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+              <b>Username</b> <a class="pull-right userUsername"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Password</b> <a class="pull-right userPassword"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Gender</b> <a class="pull-right userGender"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Date of Birth</b> <a class="pull-right userDateofbirth"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Address</b> <a class="pull-right userAddress"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Phone</b> <a class="pull-right userPhone"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Email</b> <a class="pull-right userEmail"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Status</b> <a class="pull-right userStatus"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Created</b> <a class="pull-right userCreated"></a>
+            </li>
+            <li class="list-group-item">
+              <b>Updated</b> <a class="pull-right userUpdated"></a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#update" data-toggle="tab">Update</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="active tab-pane" id="update">
+            <form id="form-user-update" class="form-horizontal">
+              <input type="hidden" class="form-control" name="userID" id="userID" required>
+              <input type="hidden" class="form-control" name="userStatus" id="userStatus" required>
+              <input type="hidden" class="form-control" name="userAccess" id="userAccess" required>
+              <input type="hidden" class="form-control" name="updateType" id="updateType" value="staff" required>
+              <input type="hidden" class="form-control" name="responseType" id="responseType" value="profile" required>
+              <div class="form-group">
+                <label for="userTitle" class="col-sm-2 control-label">Title</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="userTitle" id="userTitle" placeholder="Title" required>
+                      <option value="">Select a Title</option>
+                      <option>Mr</option>
+                      <option>Mrs</option>
+                      <option>Miss</option>
+                      <option>Ms.</option>
+                      <option>Pharm.</option>
+                      <option>Dr.</option>
+                      <option>Prof.</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userFirstname" class="col-sm-2 control-label">First Name</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="userFirstname" id="userFirstname" placeholder="First Name" required>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userLastname" class="col-sm-2 control-label">Last Name</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="userLastname" id="userLastname" placeholder="Last Name" required>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userUsername" class="col-sm-2 control-label">Username</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="userUsername" id="userUsername" placeholder="Username" readonly required>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userPassword" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" required>
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userGender" class="col-sm-2 control-label">Gender</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="userGender" id="userGender" placeholder="Gender" required>
+                      <option value="">Select a Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="unspecified">Unspecified</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userDateofbirth" class="col-sm-2 control-label">Date of Birth</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="userDateofbirth" id="userDateofbirth" placeholder="Date of Birth" required>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userAddress" class="col-sm-2 control-label">Address</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="Address" required>
+                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userPhone" class="col-sm-2 control-label">Phone</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="tel" class="form-control" name="userPhone" id="userPhone" placeholder="Phone" required>
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userEmail" class="col-sm-2 control-label">Email</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Email" required>
+                    <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Update Profile</button>
+                </div>
+              </div>
+            </form>
+            <div id="form-user-update-loader"></div>
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    loader("py-content", "py", 'users/select/' + getStorage("sessionUserID"), { user: getStorage("sessionUserID"), responseType: "profile" }, "", false);
+    $("#form-user-update #userID").val(getStorage("sessionUserID"));
+    $("#form-user-update #userDateofbirth").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+    $("#form-user-update").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      loader("form-user-update-loader", "py", 'users/update/' + getStorage("sessionUserID"), $("#form-user-update").serializeArray(), "", true);
+    });
+  });
+</script>

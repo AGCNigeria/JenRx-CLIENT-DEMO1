@@ -1,0 +1,974 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Settings
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-cogs active"></i> Settings</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#business">Business</a></li>
+          <li class="active"><a href="#sales">Sales</a></li>
+          <li class="active"><a href="#receipts">Receipts</a></li>
+          <li class="active"><a href="#backups">Backups</a></li>
+          <li class="active"><a href="#inventory">Inventory</a></li>
+          <li class="active"><a href="#payroll">Payroll</a></li>
+          <li class="active"><a href="#app">App</a></li>
+        </ul>
+        <form id="form-settings" class="form-horizontal">
+          <input type="hidden" class="form-control" name="settingsType" id="settingsType" value="general" required>
+          <div class="tab-content">
+            <div id="business">
+              <div class="col-md-12 page-header">
+                <h3>Business</h3>
+                <small>
+                  Business Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsBusinessName" class="col-sm-2 control-label">Business Name</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="settingsBusinessName" id="settingsBusinessName" placeholder="Business Name" required>
+                    <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsBusinessAddress" class="col-sm-2 control-label">Business Address</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="settingsBusinessAddress" id="settingsBusinessAddress" placeholder="Business Address" required>
+                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsBusinessEmail" class="col-sm-2 control-label">Business Email</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="email" class="form-control" name="settingsBusinessEmail" id="settingsBusinessEmail" placeholder="Business Email" required>
+                    <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsBusinessPhone" class="col-sm-2 control-label">Business Phone</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="tel" class="form-control" name="settingsBusinessPhone" id="settingsBusinessPhone" placeholder="Business Phone" required>
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="sales">
+              <div class="col-md-12 page-header">
+                <h3>Sales</h3>
+                <small>
+                  Sales Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesCurrency" class="col-sm-2 control-label">Currency</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="settingsSalesCurrency" id="settingsSalesCurrency" placeholder="Currency" style="width: 100%;">
+                      <option value="" selected>Select Currency</option>
+                      <option value="؋">Afghanistan Afghani</option>
+                      <option value="Lek">Albania Lek</option>
+                      <option value="دج">Algerian Dinar</option>
+                      <option value="€">Andorra Euro</option>
+                      <option value="Kz">Angola Kwanza</option>
+                      <option value="$">Antigua and Barbuda Dollar</option>
+                      <option value="$">Argentina Peso</option>
+                      <option value="֏">Armenia Dram</option>
+                      <option value="ƒ">Aruba Guilder</option>
+                      <option value="$">Australia Dollar</option>
+                      <option value="€">Austria Euro</option>
+                      <option value="₼">Azerbaijan Manat</option>
+                      <option value=".د.ب">Bahrain Dinar</option>
+                      <option value="$">Bahamas Dollar</option>
+                      <option value="৳">Bangladesh Taka</option>
+                      <option value="$">Barbados Dollar</option>
+                      <option value="Br">Belarus Ruble</option>
+                      <option value="fr.">Belgium Franc</option>
+                      <option value="BZ$">Belize Dollar</option>
+                      <option value="CFA">Benin West African CFA Franc</option>
+                      <option value="$">Bermuda Dollar</option>
+                      <option value="Nu.">Bhutan Ngultrum</option>
+                      <option value="$b">Bolivia Bolíviano</option>
+                      <option value="KM">Bosnia and Herzegovina Convertible Mark</option>
+                      <option value="P">Botswana Pula</option>
+                      <option value="лв">Bulgaria Lev</option>
+                      <option value="R$">Brazil Real</option>
+                      <option value="$">Brunei Darussalam Dollar</option>
+                      <option value="CFA">Burkina Faso West African CFA Franc</option>
+                      <option value="FBu">Burundi Franc</option>
+                      <option value="៛">Cambodia Riel</option>
+                      <option value="FCFA">Cameroon Central African CFA Franc</option>
+                      <option value="$">Canada Dollar</option>
+                      <option value="$">Cape Verde Escudo</option>
+                      <option value="$">Cayman Islands Dollar</option>
+                      <option value="FCFA">Central African Republic Central African CFA Franc</option>
+                      <option value="FCFA">Chad Central African CFA Franc</option>
+                      <option value="$">Chile Peso</option>
+                      <option value="¥">China Yuan Renminbi</option>
+                      <option value="$">Colombia Peso</option>
+                      <option value="CF">Comoros Franc</option>
+                      <option value="₡">Costa Rica Colon</option>
+                      <option value="kn">Croatia Kuna</option>
+                      <option value="₱">Cuba Peso</option>
+                      <option value="£">Cyprus Pound</option>
+                      <option value="Kč">Czech Republic Koruna</option>
+                      <option value="kr">Denmark Krone</option>
+                      <option value="Fdj">Djibouti Franc</option>
+                      <option value="RD$">Dominican Republic Peso</option>
+                      <option value="$">East Timor Dollar</option>
+                      <option value="$">East Caribbean Dollar</option>
+                      <option value="$">Ecuador Dollar</option>
+                      <option value="£">Egypt Pound</option>
+                      <option value="$">El Salvador Colon</option>
+                      <option value="FCFA">Equatorial Guinea Central African CFA Franc</option>
+                      <option value="Nkf">Eritrea Nakfa</option>
+                      <option value="€">Estonia Kroon</option>
+                      <option value="ብር">Ethiopia Birr</option>
+                      <option value="€">Euro Member Countries</option>
+                      <option value="£">Falkland Islands (Malvinas) Pound</option>
+                      <option value="$">Fiji Dollar</option>
+                      <option value="€">Finland Euro</option>
+                      <option value="€">France Euro</option>
+                      <option value="FCFA">Gabon Central African CFA Franc</option>
+                      <option value="ლ">Georgia Lari</option>
+                      <option value="€">Germany Euro</option>
+                      <option value="¢">Ghana Cedi</option>
+                      <option value="£">Gibraltar Pound</option>
+                      <option value="€">Greece Euro</option>
+                      <option value="$">Grenada Eastern Caribbean Dollar</option>
+                      <option value="Q">Guatemala Quetzal</option>
+                      <option value="£">Guernsey Pound</option>
+                      <option value="FG">Guinea Franc</option>
+                      <option value="CFA">Guinea-Bissau West African CFA Franc</option>
+                      <option value="$">Guyana Dollar</option>
+                      <option value="G">Haiti Gourde</option>
+                      <option value="L">Honduras Lempira</option>
+                      <option value="$">Hong Kong Dollar</option>
+                      <option value="Ft">Hungary Forint</option>
+                      <option value="kr">Iceland Krona</option>
+                      <option value="₹">India Rupee</option>
+                      <option value="Rp">Indonesia Rupiah</option>
+                      <option value="﷼">Iran Rial</option>
+                      <option value="ع.د">Iraq Dinar</option>
+                      <option value="£">Ireland Pound</option>
+                      <option value="£">Isle of Man Pound</option>
+                      <option value="₪">Israel Shekel</option>
+                      <option value="€">Italy Euro</option>
+                      <option value="CFA">Ivory Coast West African CFA Franc</option>
+                      <option value="J$">Jamaica Dollar</option>
+                      <option value="¥">Japan Yen</option>
+                      <option value="£">Jersey Pound</option>
+                      <option value="د.ا">Jordan Dinar</option>
+                      <option value="лв">Kazakhstan Tenge</option>
+                      <option value="Ksh">Kenya Shilling</option>
+                      <option value="$">Kiribati Dollar</option>
+                      <option value="₩">Korea (North) Won</option>
+                      <option value="₩">Korea (South) Won</option>
+                      <option value="د.ك">Kuwait Dinar</option>
+                      <option value="лв">Kyrgyzstan Som</option>
+                      <option value="₭">Laos Kip</option>
+                      <option value="Ls">Latvia Lat</option>
+                      <option value="£">Lebanon Pound</option>
+                      <option value="L">Lesotho Loti</option>
+                      <option value="$">Liberia Dollar</option>
+                      <option value="ل.د">Libya Dinar</option>
+                      <option value="CHF">Liechtenstein Swiss Franc</option>
+                      <option value="€">Lithuania Euro</option>
+                      <option value="€">Luxembourg Euro</option>
+                      <option value="ден">Macedonia Denar</option>
+                      <option value="Ar">Madagascar Ariary</option>
+                      <option value="MK">Malawi Kwacha</option>
+                      <option value="RM">Malaysia Ringgit</option>
+                      <option value="Rf">Maldives Rufiyaa</option>
+                      <option value="CFA">Mali West African CFA Franc</option>
+                      <option value="€">Malta Euro</option>
+                      <option value="$">Marshall Islands Dollar</option>
+                      <option value="UM">Mauritania Ouguiya</option>
+                      <option value="₨">Mauritius Rupee</option>
+                      <option value="$">Mexico Peso</option>
+                      <option value="$">Micronesia Dollar</option>
+                      <option value="L">Moldova Leu</option>
+                      <option value="€">Monaco Euro</option>
+                      <option value="₮">Mongolia Tughrik</option>
+                      <option value="€">Montenegro Euro</option>
+                      <option value="د.م.">Morocco Dirham</option>
+                      <option value="MT">Mozambique Metical</option>
+                      <option value="K">Myanmar Kyat</option>
+                      <option value="$">Namibia Dollar</option>
+                      <option value="$">Nauru Dollar</option>
+                      <option value="₨">Nepal Rupee</option>
+                      <option value="ƒ">Netherlands Antilles Guilder</option>
+                      <option value="$">New Zealand Dollar</option>
+                      <option value="C$">Nicaragua Cordoba</option>
+                      <option value="CFA">Niger West African CFA Franc</option>
+                      <option value="₦">Nigeria Naira</option>
+                      <option value="kr">Norway Krone</option>
+                      <option value="﷼">Oman Rial</option>
+                      <option value="₨">Pakistan Rupee</option>
+                      <option value="$">Palau Dollar</option>
+                      <option value="B/.">Panama Balboa</option>
+                      <option value="K">Papua New Guinea Kina</option>
+                      <option value="Gs">Paraguay Guarani</option>
+                      <option value="S/.">Peru Sol</option>
+                      <option value="₱">Philippines Peso</option>
+                      <option value="zł">Poland Zloty</option>
+                      <option value="€">Portugal Euro</option>
+                      <option value="﷼">Qatar Riyal</option>
+                      <option value="lei">Romania Leu</option>
+                      <option value="₽">Russia Ruble</option>
+                      <option value="FRw">Rwanda Franc</option>
+                      <option value="$">Saint Kitts and Nevis Eastern Caribbean Dollar</option>
+                      <option value="$">Saint Lucia Eastern Caribbean Dollar</option>
+                      <option value="£">Saint Helena Pound</option>
+                      <option value="$">Saint Vincent and the Grenadines East Caribbean Dollar</option>
+                      <option value="SAT">Samoa Tālā</option>
+                      <option value="€">San Marino Euro</option>
+                      <option value="Db">Sao Tome and Principe Dobra</option>
+                      <option value="﷼">Saudi Arabia Riyal</option>
+                      <option value="CFA">Senegal West African CFA Franc</option>
+                      <option value="Дин.">Serbia Dinar</option>
+                      <option value="₨">Seychelles Rupee</option>
+                      <option value="Le">Sierra Leone Leone</option>
+                      <option value="$">Singapore Dollar</option>
+                      <option value="Sk">Slovakia Koruna</option>
+                      <option value="€">Slovenia Euro</option>
+                      <option value="$">Solomon Islands Dollar</option>
+                      <option value="S">Somalia Shilling</option>
+                      <option value="R">South Africa Rand</option>
+                      <option value="£">South Sudan Pound</option>
+                      <option value="€">Spain Euro</option>
+                      <option value="₨">Sri Lanka Rupee</option>
+                      <option value="ج.س.">Sudan Pound</option>
+                      <option value="$">Suriname Dollar</option>
+                      <option value="kr">Sweden Krona</option>
+                      <option value="CHF">Switzerland Franc</option>
+                      <option value="£">Syria Pound</option>
+                      <option value="NT$">Taiwan New Dollar</option>
+                      <option value="ЅM">Tajikistan Somoni</option>
+                      <option value="TSh">Tanzania Shilingi</option>
+                      <option value="฿">Thailand Baht</option>
+                      <option value="FC">The Democratic Republic of the Congo Congolese Franc</option>
+                      <option value="D">The Gambia Dalasi</option>
+                      <option value="FC">The Republic of the Congo Congolese Franc</option>
+                      <option value="CFA">Togo West African CFA Franc</option>
+                      <option value="PT">Tonga Paʻanga</option>
+                      <option value="TT$">Trinidad and Tobago Dollar</option>
+                      <option value="TND">Tunisia Dinar</option>
+                      <option value="₺">Turkey Lira</option>
+                      <option value="T">Turkmenistan Manat</option>
+                      <option value="$">Tuvalu Dollar</option>
+                      <option value="USh">Uganda Shilling</option>
+                      <option value="₴">Ukraine Hryvnia</option>
+                      <option value="£">United Kingdom Pound</option>
+                      <option value="$">United States Dollar</option>
+                      <option value="$U">Uruguay Peso</option>
+                      <option value="лв">Uzbekistan Som</option>
+                      <option value="VT">Vanuatu Vatu</option>
+                      <option value="Bs">Venezuela Bolívar</option>
+                      <option value="₫">Viet Nam Dong</option>
+                      <option value="﷼">Yemen Rial</option>
+                      <option value="ZK">Zambia Kwacha</option>
+                      <option value="Z$">Zimbabwe Dollar</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesDiscountType" class="col-sm-2 control-label">Discount Type</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Discount Type" name="settingsSalesDiscountType" id="settingsSalesDiscountTypePercentage" value="percentage" checked required> Percentage
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Discount Type" name="settingsSalesDiscountType" id="settingsSalesDiscountTypeAmount" value="amount" required> Amount
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesDiscount" class="col-sm-2 control-label">Discount</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="0" min="0" step="0.01" class="form-control" name="settingsSalesDiscount" id="settingsSalesDiscount" placeholder="Discount" required>
+                    <span class="input-group-addon"><i class="fa fa-calculator"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesTax" class="col-sm-2 control-label">Tax (%)</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="0" min="0" step="0.01" class="form-control" name="settingsSalesTax" id="settingsSalesTax" placeholder="Tax" required>
+                    <span class="input-group-addon"><i class="fa fa-calculator"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesTaxType" class="col-sm-2 control-label">Tax Type</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Tax Type" name="settingsSalesTaxType" id="settingsSalesTaxTypeInclusive" value="inclusive" checked required> Inclusive
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Tax Type" name="settingsSalesTaxType" id="settingsSalesTaxTypeExclusive" value="exclusive" required> Exclusive
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsSalesInfo" class="col-sm-2 control-label">Additional Clinical Information</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <textarea class="form-control" name="settingsSalesInfo" id="settingsSalesInfo" placeholder="Additional Clinical Information" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="receipts">
+              <div class="col-md-12 page-header">
+                <h3>Receipts</h3>
+                <small>
+                  Receipts Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptText" class="col-sm-2 control-label">Receipt Text</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <textarea class="form-control" name="settingsReceiptText" id="settingsReceiptText" placeholder="Receipt Text" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsCustomer" class="col-sm-2 control-label">Customer</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Customer" name="settingsReceiptsCustomer" id="settingsReceiptsCustomerShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Customer" name="settingsReceiptsCustomer" id="settingsReceiptsCustomerHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsStaff" class="col-sm-2 control-label">Staff</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Staff" name="settingsReceiptsStaff" id="settingsReceiptsStaffShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Staff" name="settingsReceiptsStaff" id="settingsReceiptsStaffHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsDiscount" class="col-sm-2 control-label">Discount</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Discount" name="settingsReceiptsDiscount" id="settingsReceiptsDiscountShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Discount" name="settingsReceiptsDiscount" id="settingsReceiptsDiscountHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPaid" class="col-sm-2 control-label">Paid</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Paid" name="settingsReceiptsPaid" id="settingsReceiptsPaidShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Paid" name="settingsReceiptsPaid" id="settingsReceiptsPaidHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPayment" class="col-sm-2 control-label">Payment</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Payment" name="settingsReceiptsPayment" id="settingsReceiptsPaymentShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Payment" name="settingsReceiptsPayment" id="settingsReceiptsPaymentHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsTax" class="col-sm-2 control-label">Tax</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Tax" name="settingsReceiptsTax" id="settingsReceiptsTaxShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Tax" name="settingsReceiptsTax" id="settingsReceiptsTaxHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsBalance" class="col-sm-2 control-label">Balance</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Balance" name="settingsReceiptsBalance" id="settingsReceiptsBalanceShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Balance" name="settingsReceiptsBalance" id="settingsReceiptsBalanceHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsInfo" class="col-sm-2 control-label">Additional Clinical Information</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Info" name="settingsReceiptsInfo" id="settingsReceiptsInfoShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Info" name="settingsReceiptsInfo" id="settingsReceiptsInfoHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPrintPOSWidth" class="col-sm-2 control-label">Print POS Width</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="270" min="0" step="0.01" class="form-control" name="settingsReceiptsPrintPOSWidth" id="settingsReceiptsPrintPOSWidth" placeholder="Print POS Width" required>
+                    <span class="input-group-addon"><i class="fa fa-print"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPrintPOSFontSize" class="col-sm-2 control-label">Print POS Font Size</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="10" min="0" step="0.01" class="form-control" name="settingsReceiptsPrintPOSFontSize" id="settingsReceiptsPrintPOSFontSize" placeholder="Print POS Font Size" required>
+                    <span class="input-group-addon"><i class="fa fa-print"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPrintPOSAlignTop" class="col-sm-2 control-label">Print POS Align Top</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="0" step="0.01" class="form-control" name="settingsReceiptsPrintPOSAlignTop" id="settingsReceiptsPrintPOSAlignTop" placeholder="Print POS Align Top" required>
+                    <span class="input-group-addon"><i class="fa fa-print"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsReceiptsPrintPOSAlignLeft" class="col-sm-2 control-label">Print POS Align Left</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="0" step="0.01" class="form-control" name="settingsReceiptsPrintPOSAlignLeft" id="settingsReceiptsPrintPOSAlignLeft" placeholder="Print POS Align Left" required>
+                    <span class="input-group-addon"><i class="fa fa-print"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="backups">
+              <div class="col-md-12 page-header">
+                <h3>Backups</h3>
+                <small>
+                  Backups Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsBackupsNumberLimit" class="col-sm-2 control-label">Number Limit</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="number" value="100" min="0" step="1" class="form-control" name="settingsBackupsNumberLimit" id="settingsBackupsNumberLimit" placeholder="Backups Number Limit" required>
+                    <span class="input-group-addon"><i class="fa fa-server"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="inventory">
+              <div class="col-md-12 page-header">
+                <h3>Inventory</h3>
+                <small>
+                  Inventory Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsInventoryExpiryNotification" class="col-sm-2 control-label">Expiry Notification</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="settingsInventoryExpiryNotification" id="settingsInventoryExpiryNotification" placeholder="Expiry Notification" style="width: 100%;" required>
+                      <option value="">Select Expiry Notification</option>
+                      <option value="1">1 Month</option>
+                      <option value="2">2 Months</option>
+                      <option value="3" selected>3 Months</option>
+                      <option value="4">4 Months</option>
+                      <option value="5">5 Months</option>
+                      <option value="6">6 Months</option>
+                      <option value="7">7 Months</option>
+                      <option value="8">8 Months</option>
+                      <option value="9">9 Months</option>
+                      <option value="10">10 Months</option>
+                      <option value="11">11 Months</option>
+                      <option value="12">12 Months</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="payroll">
+              <div class="col-md-12 page-header">
+                <h3>Payroll</h3>
+                <small>
+                  Payroll Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsPayroll" class="col-sm-2 control-label">Payroll</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <textarea class="form-control" name="settingsPayroll" id="settingsPayroll" placeholder="Payroll" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div id="app">
+              <div class="col-md-12 page-header">
+                <h3>App</h3>
+                <small>
+                  App Settings &nbsp;
+                  <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+                  <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="settingsAppProFeature" class="col-sm-2 control-label">Date & Time</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <h4 class="dateTime"></h4>
+                    <small><b>Incorrect date, time or timezone? Please, adjust system date/time/timezone, then, close and relaunch JenRx app.</b></small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsAppProFeature" class="col-sm-2 control-label">Pro Feature</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Pro Feature" name="settingsAppProFeature" id="settingsAppProFeatureShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Pro Feature" name="settingsAppProFeature" id="settingsAppProFeatureHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsAppClinicalFeature" class="col-sm-2 control-label">Clinical Feature</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Clinical Feature" name="settingsAppClinicalFeature" id="settingsAppClinicalFeatureShow" value="true" checked required> Show
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Clinical Feature" name="settingsAppClinicalFeature" id="settingsAppClinicalFeatureHide" value="false" required> Hide
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settingsAppVoiceResponse" class="col-sm-2 control-label">Voice Response</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" placeholder="Voice Response" name="settingsAppVoiceResponse" id="settingsAppVoiceResponseActivate" value="true" checked required> Activate
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" placeholder="Voice Response" name="settingsAppVoiceResponse" id="settingsAppVoiceResponseDeactivate" value="false" required> Deactivate
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+          <div class="col-md-12 page-header">
+            <small>
+              <a href="#" onclick='scroll("form-settings");'><i class="fa fa-angle-double-up"></i></a>
+              <a href="#" onclick='scroll("form-settings-loader");'><i class="fa fa-angle-double-down"></i></a>
+            </small>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i> &nbsp; Update Settings</button>
+            </div>
+          </div>
+        </form>
+        <div id="form-settings-loader"></div>
+        <br><br>
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    userAccessCheck();
+    if (getStorage("settingsSalesInfo") === null) {
+      $("#form-settings textarea[name=settingsSalesInfo]").val("<p><b><u>Disease:</u></b> <br></p><p><b><u>Treatment:</u></b> <br></p><p><b><u>Physician:</u></b> <br></p>");
+    }
+    if (getStorage("settingsPayroll") === null) {
+      $("#form-settings textarea[name=settingsPayroll]").val("<p><b><u>Payroll Start Date:</u></b> <br></p><p><b><u>Payroll End Date:</u></b> <br></p><p><b><u>Payment Date:</u></b> <br></p><p><b><u>Tax (%):</u></b> <br></p><p><b><u>Other Deductions:</u></b> <br></p>");
+    }
+    $("#form-settings #settingsSalesInfo").ckeditor(scroll("form-settings"));
+    $("#form-settings #settingsReceiptText").ckeditor(scroll("form-settings"));
+    $("#form-settings #settingsPayroll").ckeditor(scroll("form-settings"));
+    loader("py-content", "py", 'settings/select/' + $("#form-settings #settingsType").val(), { title: $("#form-settings #settingsType").val() }, "", false);
+    $("#form-settings").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      if ($.parseJSON(getStorage("jenrxLicense")) != true) {
+        loader("license-content", "popup", "license-jenrx-pro", "", "", false);
+      }
+      var data = {
+        settingsBusinessName: $("#form-settings input[name=settingsBusinessName]").val(),
+        settingsBusinessAddress: $("#form-settings input[name=settingsBusinessAddress]").val(),
+        settingsBusinessEmail: $("#form-settings input[name=settingsBusinessEmail]").val(),
+        settingsBusinessPhone: $("#form-settings input[name=settingsBusinessPhone]").val(),
+        settingsSalesCurrency: $("#form-settings select[name=settingsSalesCurrency]").val(),
+        settingsSalesDiscountType: $("#form-settings input[name=settingsSalesDiscountType]:checked").val(),
+        settingsSalesDiscount: $("#form-settings input[name=settingsSalesDiscount]").val(),
+        settingsSalesTax: $("#form-settings input[name=settingsSalesTax]").val(),
+        settingsSalesTaxType: $("#form-settings input[name=settingsSalesTaxType]:checked").val(),
+        settingsSalesInfo: $("#form-settings textarea[name=settingsSalesInfo]").val(),
+        settingsReceiptText: $("#form-settings textarea[name=settingsReceiptText]").val(),
+        settingsReceiptsCustomer: $("#form-settings input[name=settingsReceiptsCustomer]:checked").val(),
+        settingsReceiptsStaff: $("#form-settings input[name=settingsReceiptsStaff]:checked").val(),
+        settingsReceiptsDiscount: $("#form-settings input[name=settingsReceiptsDiscount]:checked").val(),
+        settingsReceiptsPaid: $("#form-settings input[name=settingsReceiptsPaid]:checked").val(),
+        settingsReceiptsPayment: $("#form-settings input[name=settingsReceiptsPayment]:checked").val(),
+        settingsReceiptsTax: $("#form-settings input[name=settingsReceiptsTax]:checked").val(),
+        settingsReceiptsBalance: $("#form-settings input[name=settingsReceiptsBalance]:checked").val(),
+        settingsReceiptsInfo: $("#form-settings input[name=settingsReceiptsInfo]:checked").val(),
+        settingsReceiptsPrintPOSWidth: $("#form-settings input[name=settingsReceiptsPrintPOSWidth]").val(),
+        settingsReceiptsPrintPOSFontSize: $("#form-settings input[name=settingsReceiptsPrintPOSFontSize]").val(),
+        settingsReceiptsPrintPOSAlignTop: $("#form-settings input[name=settingsReceiptsPrintPOSAlignTop]").val(),
+        settingsReceiptsPrintPOSAlignLeft: $("#form-settings input[name=settingsReceiptsPrintPOSAlignLeft]").val(),
+        settingsBackupsNumberLimit: $("#form-settings input[name=settingsBackupsNumberLimit]").val(),
+        settingsInventoryExpiryNotification: $("#form-settings select[name=settingsInventoryExpiryNotification]").val(),
+        settingsPayroll: $("#form-settings textarea[name=settingsPayroll]").val(),
+        settingsAppProFeature: $("#form-settings input[name=settingsAppProFeature]:checked").val(),
+        settingsAppClinicalFeature: $("#form-settings input[name=settingsAppClinicalFeature]:checked").val(),
+        settingsAppVoiceResponse: $("#form-settings input[name=settingsAppVoiceResponse]:checked").val()
+      };
+      data = JSON.stringify(data);
+      loader("form-settings-loader", "py", 'settings/update/' + $("#form-settings #settingsType").val(), { title: $("#form-settings #settingsType").val(), data: data }, "", true);
+    });
+  });
+  function loadGeneralSettings(data) {
+    if (data[0].data) {
+      data = $.parseJSON(data[0].data);
+      $("#form-settings input[name=settingsBusinessName]").val(data.settingsBusinessName);
+      $("#form-settings input[name=settingsBusinessAddress]").val(data.settingsBusinessAddress);
+      $("#form-settings input[name=settingsBusinessEmail]").val(data.settingsBusinessEmail);
+      $("#form-settings input[name=settingsBusinessPhone]").val(data.settingsBusinessPhone);
+      $("#form-settings select[name=settingsSalesCurrency]").val(data.settingsSalesCurrency);
+      if (!data.settingsSalesDiscountType) {
+        $("#form-settings input[name=settingsSalesDiscountType]").val(["percentage"]);
+      }
+      else {
+        $("#form-settings input[name=settingsSalesDiscountType]").val([data.settingsSalesDiscountType]);
+      }
+      if (data.settingsSalesDiscountType == "percentage") {
+        $("#form-settings #settingsSalesDiscountTypePercentage").click();
+      }
+      else if (data.settingsSalesDiscountType == "amount") {
+        $("#form-settings #settingsSalesDiscountTypeAmount").click();
+      }
+      else {
+
+      }
+      $("#form-settings input[name=settingsSalesDiscount]").val(data.settingsSalesDiscount);
+      $("#form-settings input[name=settingsSalesTax]").val(data.settingsSalesTax);
+      if (!data.settingsSalesTaxType) {
+        $("#form-settings input[name=settingsSalesTaxType]").val(["inclusive"]);
+      }
+      else {
+        $("#form-settings input[name=settingsSalesTaxType]").val([data.settingsSalesTaxType]);
+      }
+      if (data.settingsSalesTaxType == "inclusive") {
+        $("#form-settings #settingsSalesTaxTypeInclusive").click();
+      }
+      else if (data.settingsSalesTaxType == "exclusive") {
+        $("#form-settings #settingsSalesTaxTypeExclusive").click();
+      }
+      else {
+
+      }
+      $("#form-settings textarea[name=settingsSalesInfo]").val(data.settingsSalesInfo);
+      $("#form-settings textarea[name=settingsReceiptText]").val(data.settingsReceiptText);
+      if (!data.settingsReceiptsCustomer) {
+        data.settingsReceiptsCustomer = true;
+      }
+      $("#form-settings input[name=settingsReceiptsCustomer]").val([data.settingsReceiptsCustomer]);
+      if (data.settingsReceiptsCustomer == "true") {
+        $("#form-settings #settingsReceiptsCustomerShow").click();
+      }
+      else if (data.settingsReceiptsCustomer == "false") {
+        $("#form-settings #settingsReceiptsCustomerHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsStaff) {
+        data.settingsReceiptsStaff = true;
+      }
+      $("#form-settings input[name=settingsReceiptsStaff]").val([data.settingsReceiptsStaff]);
+      if (data.settingsReceiptsStaff == "true") {
+        $("#form-settings #settingsReceiptsStaffShow").click();
+      }
+      else if (data.settingsReceiptsStaff == "false") {
+        $("#form-settings #settingsReceiptsStaffHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsDiscount) {
+        data.settingsReceiptsDiscount = true;
+      }
+      $("#form-settings input[name=settingsReceiptsDiscount]").val([data.settingsReceiptsDiscount]);
+      if (data.settingsReceiptsDiscount == "true") {
+        $("#form-settings #settingsReceiptsDiscountShow").click();
+      }
+      else if (data.settingsReceiptsDiscount == "false") {
+        $("#form-settings #settingsReceiptsDiscountHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsPaid) {
+        data.settingsReceiptsPaid = true;
+      }
+      $("#form-settings input[name=settingsReceiptsPaid]").val([data.settingsReceiptsPaid]);
+      if (data.settingsReceiptsPaid == "true") {
+        $("#form-settings #settingsReceiptsPaidShow").click();
+      }
+      else if (data.settingsReceiptsPaid == "false") {
+        $("#form-settings #settingsReceiptsPaidHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsPayment) {
+        data.settingsReceiptsPayment = true;
+      }
+      $("#form-settings input[name=settingsReceiptsPayment]").val([data.settingsReceiptsPayment]);
+      if (data.settingsReceiptsPayment == "true") {
+        $("#form-settings #settingsReceiptsPaymentShow").click();
+      }
+      else if (data.settingsReceiptsPayment == "false") {
+        $("#form-settings #settingsReceiptsPaymentHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsTax) {
+        data.settingsReceiptsTax = true;
+      }
+      $("#form-settings input[name=settingsReceiptsTax]").val([data.settingsReceiptsTax]);
+      if (data.settingsReceiptsTax == "true") {
+        $("#form-settings #settingsReceiptsTaxShow").click();
+      }
+      else if (data.settingsReceiptsTax == "false") {
+        $("#form-settings #settingsReceiptsTaxHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsBalance) {
+        data.settingsReceiptsBalance = true;
+      }
+      $("#form-settings input[name=settingsReceiptsBalance]").val([data.settingsReceiptsBalance]);
+      if (data.settingsReceiptsBalance == "true") {
+        $("#form-settings #settingsReceiptsBalanceShow").click();
+      }
+      else if (data.settingsReceiptsBalance == "false") {
+        $("#form-settings #settingsReceiptsBalanceHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsReceiptsInfo) {
+        data.settingsReceiptsInfo = true;
+      }
+      $("#form-settings input[name=settingsReceiptsInfo]").val([data.settingsReceiptsInfo]);
+      if (data.settingsReceiptsInfo == "true") {
+        $("#form-settings #settingsReceiptsInfoShow").click();
+      }
+      else if (data.settingsReceiptsInfo == "false") {
+        $("#form-settings #settingsReceiptsInfoHide").click();
+      }
+      else {
+
+      }
+      $("#form-settings input[name=settingsReceiptsPrintPOSWidth]").val(data.settingsReceiptsPrintPOSWidth);
+      $("#form-settings input[name=settingsReceiptsPrintPOSFontSize]").val(data.settingsReceiptsPrintPOSFontSize);
+      $("#form-settings input[name=settingsReceiptsPrintPOSAlignTop]").val(data.settingsReceiptsPrintPOSAlignTop);
+      $("#form-settings input[name=settingsReceiptsPrintPOSAlignLeft]").val(data.settingsReceiptsPrintPOSAlignLeft);
+      $("#form-settings input[name=settingsBackupsNumberLimit]").val(data.settingsBackupsNumberLimit);
+      $("#form-settings select[name=settingsInventoryExpiryNotification]").val(data.settingsInventoryExpiryNotification);
+      $("#form-settings textarea[name=settingsPayroll]").val(data.settingsPayroll);
+      if (!data.settingsAppProFeature) {
+        data.settingsAppProFeature = true;
+      }
+      $("#form-settings input[name=settingsAppProFeature]").val([data.settingsAppProFeature]);
+      if (data.settingsAppProFeature == "true") {
+        $("#form-settings #settingsAppProFeatureShow").click();
+      }
+      else if (data.settingsAppProFeature == "false") {
+        $("#form-settings #settingsAppProFeatureHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsAppClinicalFeature) {
+        data.settingsAppClinicalFeature = true;
+      }
+      $("#form-settings input[name=settingsAppClinicalFeature]").val([data.settingsAppClinicalFeature]);
+      if (data.settingsAppClinicalFeature == "true") {
+        $("#form-settings #settingsAppClinicalFeatureShow").click();
+      }
+      else if (data.settingsAppClinicalFeature == "false") {
+        $("#form-settings #settingsAppClinicalFeatureHide").click();
+      }
+      else {
+
+      }
+      if (!data.settingsAppVoiceResponse) {
+        data.settingsAppVoiceResponse = true;
+      }
+      $("#form-settings input[name=settingsAppVoiceResponse]").val([data.settingsAppVoiceResponse]);
+      if (data.settingsAppVoiceResponse == "true") {
+        $("#form-settings #settingsAppVoiceResponseActivate").click();
+      }
+      else if (data.settingsAppVoiceResponse == "false") {
+        $("#form-settings #settingsAppVoiceResponseDeactivate").click();
+      }
+      else {
+
+      }
+    }
+  }
+</script>

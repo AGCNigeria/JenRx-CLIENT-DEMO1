@@ -1,0 +1,224 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Inventory Supply
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-list-alt active"></i><i class="fa fa-plus-square active"></i> Inventory Supply</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Inventory Supply</h3>
+    </div>
+    <div class="box-body">
+
+      <form id="form-inventory-select" class="form-horizontal">
+        <div class="form-group">
+          <label for="inventory" class="col-sm-2 control-label">Inventory</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="inventory" id="inventory" placeholder="Search Inventory" style="width: 100%;" required onchange="selectInventory()">
+              </select>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form id="form-inventory-supply" class="form-horizontal">
+        <input type="hidden" class="form-control" name="inventoryID" id="inventoryID" required>
+        <input type="hidden" class="form-control" name="inventoryStatus" id="inventoryStatus" value="active" required>
+        <input type="hidden" class="form-control" name="inventoryApis" id="inventoryApis">
+        <input type="hidden" class="form-control" name="updateType" id="updateType" value="inventory" required>
+        <input type="hidden" class="form-control" name="expenseType" id="expenseType" placeholder="Inventory" value="Inventory" required>
+        <input type="hidden" class="form-control userID" name="userID" id="userID" required>
+        <div class="form-group">
+          <label for="inventoryName" class="col-sm-2 control-label">Name</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="inventoryName" id="inventoryName" placeholder="Name" readonly required>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryQuantity" class="col-sm-2 control-label">Quantity</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.1" class="form-control" name="inventoryQuantity" id="inventoryQuantity" placeholder="Quantity" readonly required>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryQuantitySupplied" class="col-sm-2 control-label">Quantity Supplied</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.1" class="form-control" name="inventoryQuantitySupplied" id="inventoryQuantitySupplied" placeholder="Quantity" required>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryPackaging" class="col-sm-2 control-label">Packaging</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="inventoryPackaging" id="inventoryPackaging" placeholder="Packaging" readonly required>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryCostprice" class="col-sm-2 control-label">Cost Price</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.01" class="form-control" name="inventoryCostprice" id="inventoryCostprice" placeholder="Cost Price" required>
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventorySellingprice" class="col-sm-2 control-label">Selling Price</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.01" class="form-control" name="inventorySellingprice" id="inventorySellingprice" placeholder="Selling Price" required>
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryReorderlevel" class="col-sm-2 control-label">Reorder Level</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.1" class="form-control" name="inventoryReorderlevel" id="inventoryReorderlevel" placeholder="Reorder Level" required>
+              <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryBarcode" class="col-sm-2 control-label">Barcode</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="inventoryBarcode" id="inventoryBarcode" placeholder="Barcode">
+              <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inventoryExpirydate" class="col-sm-2 control-label">Expiry Date</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="inventoryExpirydate" id="inventoryExpirydate" placeholder="Expiry Date" required>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplier" class="col-sm-2 control-label">Supplier &nbsp; <button type="button" class="btn btn-success btn-sm" onclick='loader("popup-content", "popup", "suppliers-add", "", "", false);' title="Add New Supplier"><i class="glyphicon glyphicon-user text-white"></i><i class="fa fa-plus text-white"></i></button></label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="supplier" id="supplier" placeholder="Search Supplier" style="width: 100%;" required>
+              </select>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseTitle" class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="expenseTitle" id="expenseTitle" placeholder="Title" required>
+              <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseAmount" class="col-sm-2 control-label">Amount</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.01" class="form-control" name="expenseAmount" id="expenseAmount" placeholder="Amount" required>
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseDetails" class="col-sm-2 control-label">Details</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <textarea class="form-control" name="expenseDetails" id="expenseDetails" placeholder="Details" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i> &nbsp; Add Inventory Supply</button>
+          </div>
+        </div>
+      </form>
+      <div id="form-inventory-update-loader"></div>
+      <div id="form-expenses-insert-loader"></div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    select2Search("inventory", "form-inventory-select #inventory");
+    select2Search("suppliers", "form-inventory-supply #supplier");
+    $("#form-inventory-supply").hide();
+    $("#form-inventory-supply #inventoryExpirydate").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+    $("#form-inventory-supply .userID").val(getStorage("sessionUserID"));
+    $("#form-inventory-supply #expenseDetails").ckeditor(scroll("form-inventory-supply"));
+    $("#form-inventory-supply").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      quantity = parseFloat($("#form-inventory-supply #inventoryQuantity").val()) + parseFloat($("#form-inventory-supply #inventoryQuantitySupplied").val());
+      expenseDetails = $("#form-inventory-supply #expenseDetails").val() + '<jenrx type="inventory-supply" supplier="' + $("#form-inventory-supply #supplier").val() + '" inventory="' + $("#form-inventory-supply #inventoryID").val() + '" quantity="' + $("#form-inventory-supply #inventoryQuantitySupplied").val() + '"></jenrx>';
+      loader("form-inventory-update-loader", "py", 'inventory/update/' + $("#form-inventory-supply #inventoryID").val(), { inventoryID: $("#form-inventory-supply #inventoryID").val(), inventoryName: $("#form-inventory-supply #inventoryName").val(), inventoryQuantity: quantity, inventoryPackaging: $("#form-inventory-supply #inventoryPackaging").val(), inventoryCostprice: $("#form-inventory-supply #inventoryCostprice").val(), inventorySellingprice: $("#form-inventory-supply #inventorySellingprice").val(), inventoryReorderlevel: $("#form-inventory-supply #inventoryReorderlevel").val(), inventoryBarcode: $("#form-inventory-supply #inventoryBarcode").val(), inventoryExpirydate: $("#form-inventory-supply #inventoryExpirydate").val(), inventoryApis: $("#form-inventory-supply #inventoryApis").val(), inventoryStatus: $("#form-inventory-supply #inventoryStatus").val(), updateType: $("#form-inventory-supply #updateType").val() }, "", true);
+      loader("form-expenses-insert-loader", "py", "expenses/insert", { userID: $("#form-inventory-supply #userID").val(), expenseType: $("#form-inventory-supply #expenseType").val(), expenseTitle: $("#form-inventory-supply #expenseTitle").val(), expenseAmount: $("#form-inventory-supply #expenseAmount").val(), expenseDetails: expenseDetails }, "", true);
+    });
+  });
+  function selectInventory() {
+    $("#form-inventory-supply #inventoryID").val($("#form-inventory-select #inventory").val());
+    loader("py-content", "py", 'inventory/select/' + $("#form-inventory-supply #inventoryID").val(), { inventory: $("#form-inventory-select #inventory").val() }, "", false);
+    $("#form-inventory-supply").show();
+  }
+  function loadFormInventoryUpdate(inventory) {
+    $("#form-inventory-supply #inventoryName").val(inventory[0].name);
+    $("#form-inventory-supply #inventoryQuantity").val(inventory[0].quantity);
+    $("#form-inventory-supply #inventoryPackaging").val(inventory[0].packaging);
+    $("#form-inventory-supply #inventoryCostprice").val(inventory[0].costprice);
+    $("#form-inventory-supply #inventorySellingprice").val(inventory[0].sellingprice);
+    $("#form-inventory-supply #inventoryReorderlevel").val(inventory[0].reorderlevel);
+    $("#form-inventory-supply #inventoryBarcode").val(inventory[0].barcode);
+    $("#form-inventory-supply #inventoryExpirydate").val(inventory[0].expirydate);
+    $("#form-inventory-supply #inventoryApis").val(inventory[0].apis);
+    $("#form-inventory-supply #inventoryStatus").val(inventory[0].status);
+    $("#form-inventory-supply #inventoryQuantitySupplied").val(0);
+    $("#form-inventory-supply #expenseTitle").val("Inventory Supply");
+  }
+</script>

@@ -1,0 +1,80 @@
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>Jen</b>Rx</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg"><span id="startup-process">Starting</span> JenRx Application</p>
+
+    <form id="form-server">
+      <div class="form-group has-feedback">
+        <input type="text" name="server" id="server" class="form-control" placeholder="Server Name" readonly autofocus required>
+        <span class="fa fa-laptop form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" disabled class="btn btn-primary btn-block btn-flat">Connect</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <div id="form-server-loader"></div>
+    <div id="startup"></div>
+    <div id="shutdown"></div>
+    <div id="speech-content"></div>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+<!-- page script -->
+<script>
+  $(function () {
+    if (getStorage("settingsServer") === null) {
+      setStorage("settingsServer", "demo1.cloud.jeniosolutions.com");
+      $("script[src='dist/js/jenrx.js']").remove();
+      $("<script>").attr("src", "dist/js/jenrx.js").appendTo("head");
+    }
+    if (getStorage("settingsServer") !== null) {
+      $("#form-server #server").val(getStorage("settingsServer"));
+    }
+    loader("startup", "php", "startup", "", "", true);
+    loader("shutdown", "php", "shutdown", "", "", false);
+    setTimeout(function() { loader("startup", "py", "app/check", "", "", true); }, 7000);
+    loader("speech-content", "php", "speech", { type: "normal", text: "Starting JenRx Application" }, "", false);
+    loader("speech-content", "php", "speech", { type: "waitprocess", text: "Shutdown JenRx Application" }, "", false);
+    $("#form-server").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      placeholder("form-server-loader");
+      $.ajax({
+        type: "POST",
+        url: 'https://' + $("#form-server #server").val().toLowerCase() + '/app/check/',
+        data: "",
+        dataType: "json",
+        beforeSend: function() {
+        },
+        success: function(result) {
+          resultHandler("json", result, "form-server-loader");
+          setStorage("settingsServer", $("#form-server #server").val().toLowerCase());
+          $("script[src='dist/js/jenrx.js']").remove();
+          $("<script>").attr("src", "dist/js/jenrx.js").appendTo("head");
+        },
+        error: function(xhr) {
+          if (xhr.status == 0) {
+            xhr.responseText = "Server Not Found!";
+          }
+          errorHandler(xhr, "form-server-loader");
+          loader("speech-content", "php", "speech", { type: "normal", text: xhr.responseText }, "", false);
+        },
+        complete: function() {
+          $("button").removeAttr("disabled");
+        }
+      });
+    });
+  });
+</script>

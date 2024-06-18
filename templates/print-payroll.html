@@ -1,0 +1,98 @@
+<!-- Main content -->
+<section class="invoice" id="payroll-section">
+
+  <!-- row -->
+  <div class="invoice" id="payroll-prepare">
+
+    <div id="payroll-print">
+
+      <div class="row business-info">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-institution"></i> <span id="payroll-settingsBusinessName"></span>
+            <small class="pull-right"><strong>Date</strong> <span id="payroll-date"></span></small>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          <address>
+            <strong>Address</strong><br>
+            <span id="payroll-settingsBusinessAddress"></span>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <address>
+            <strong>Email</strong><br>
+            <span id="payroll-settingsBusinessEmail"></span>
+          </address>
+          <address>
+            <strong>Phone</strong><br>
+            <span id="payroll-settingsBusinessPhone"></span>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <strong id="payroll-type"></strong><br>
+          <span id="payroll-title"></span><br>
+          <br>
+          <b>Staff</b><br><span id="payroll-staff"></span>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          <b>Amount:</b>
+          <div class="lead" id="payroll-amount">
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th>Details</th>
+                <td id="payroll-details"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </div>
+
+    <div class="row no-print">
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" onclick="printSection('payroll-print');">
+          <i class="fa fa-print"></i> &nbsp; Print
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <!-- ./row -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#payroll-section").hide();
+  });
+  function loadPayroll(expenses) {
+    $("#payroll-staff").html(expenses[0].users_title + ' ' + expenses[0].firstname + ' ' + expenses[0].lastname);
+    $("#payroll-type").html(expenses[0].type);
+    $("#payroll-title").html(expenses[0].title);
+    $("#payroll-amount").html(getStorage("settingsSalesCurrency") + expenses[0].amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+    $("#payroll-details").html(expenses[0].details);
+    $("#payroll-date").html(expenses[0].created);
+    settingsApply();
+    popupModal("Payroll", $("#payroll-prepare").html(), "default", "popup-content");
+    loadPayroll = undefined;
+  }
+</script>

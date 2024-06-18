@@ -1,0 +1,378 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Search Expenses
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i><i class="fa fa-search active"></i> Search Expenses</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Search Expenses</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#expenses-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <form id="form-expenses-search" class="form-horizontal">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='expenseSearchDate(new Date(), new Date());'>Today</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1); expenseSearchDate(yesterday, yesterday);'>Yesterday</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var sevendays = new Date(); sevendays.setDate(sevendays.getDate() - 7); expenseSearchDate(sevendays, new Date());'>Past 7 Days</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var thirtydays = new Date(); thirtydays.setDate(thirtydays.getDate() - 30); expenseSearchDate(thirtydays, new Date());'>Past 30 Days</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="startDate" class="col-sm-4 control-label">Start Date</label>
+
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" class="form-control" name="startDate" id="startDate" placeholder="Start Date" required>
+                <span class="input-group-addon"><label for="startDate"><i class="fa fa-calendar"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="startTime" class="col-sm-4 control-label">Start Time</label>
+
+            <div class="col-sm-8 bootstrap-timepicker">
+              <div class="input-group">
+                <input type="text" class="form-control" name="startTime" id="startTime" placeholder="Start Time" required>
+                <span class="input-group-addon"><label for="startTime"><i class="fa fa-clock-o"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="endDate" class="col-sm-4 control-label">End Date</label>
+
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" class="form-control" name="endDate" id="endDate" placeholder="End Date" required>
+                <span class="input-group-addon"><label for="endDate"><i class="fa fa-calendar"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="endTime" class="col-sm-4 control-label">End Time</label>
+
+            <div class="col-sm-8 bootstrap-timepicker">
+              <div class="input-group">
+                <input type="text" class="form-control" name="endTime" id="endTime" placeholder="End Time" required>
+                <span class="input-group-addon"><label for="endTime"><i class="fa fa-clock-o"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="box box-primary collapsed-box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a href="#"><small class="text-primary" data-widget="collapse"><i class="fa fa-filter"></i> Filter Search <i class="fa fa-search"></i></small></a></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="form-group">
+                <label for="userID" class="col-sm-2 control-label">Staff</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="userID" id="userID" placeholder="Search Staff" style="width: 100%;">
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="expenseType" class="col-sm-2 control-label">Type</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <select class="form-control" name="expenseType" id="expenseType" placeholder="Type" onchange="expenseTypeFunc();">
+                      <option value="">Select an Expense Type</option>
+                      <option>ICT</option>
+                      <option>Insurance</option>
+                      <option>Inventory</option>
+                      <option>Lease</option>
+                      <option>Maintenance</option>
+                      <option>Mortgage</option>
+                      <option>Office Supplies</option>
+                      <option>Payroll</option>
+                      <option>Rent</option>
+                      <option>Transportation</option>
+                      <option>Utilities</option>
+                      <option>Others</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group expense-type-others">
+                <label for="expenseTypeOthers" class="col-sm-2 control-label">Others</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="expenseTypeOthers" id="expenseTypeOthers" placeholder="Type">
+                    <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="expenseTitle" class="col-sm-2 control-label">Title</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="expenseTitle" id="expenseTitle" placeholder="Title">
+                    <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="expenseDetails" class="col-sm-2 control-label">Details</label>
+
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="expenseDetails" id="expenseDetails" placeholder="Details">
+                    <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="reset" class="btn btn-primary btn-sm" onclick='$("#userID").empty().trigger("change");expenseTypeFunc();'><i class="fa fa-undo"></i> &nbsp; Reset</button>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> &nbsp; Search Expenses</button>
+          </div>
+        </div>
+      </form>
+      <div class="table-responsive" id="expenses-search-result">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-lg btn-flat col-md-12 col-sm-12">Total: <span id="expenses-search-total"></span></button>
+            <br><br><br>
+          </div>
+        </div>
+        <table id="table-expenses-search" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th></th>
+              <th>Staff</th>
+              <th>Type</th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Details</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody id="expense-search-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th></th>
+              <th>Staff</th>
+              <th>Type</th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Details</th>
+              <th>Dates</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-expenses-search-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#form-expenses-search #startDate").datepicker({
+      autoclose: true,
+      format: "yyyy-mm-dd"
+    });
+    $("#form-expenses-search #startTime").timepicker({
+      showInputs: false,
+      defaultTime: "12:00 AM"
+    });
+    $("#form-expenses-search #endDate").datepicker({
+      autoclose: true,
+      format: "yyyy-mm-dd"
+    });
+    $("#form-expenses-search #endTime").timepicker({
+      showInputs: false,
+      defaultTime: "11:59 PM"
+    });
+    select2Search("users", "form-expenses-search #userID");
+    $(".expense-type-others").hide();
+    $("#expenses-search-result").hide();
+    $("#form-expenses-search").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      $("#expenses-search-result").hide();
+      var startDate = new Date($("#form-expenses-search #startDate").val() + ' ' + $("#form-expenses-search #startTime").val());
+      startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, "0") + '-' + startDate.getDate().toString().padStart(2, "0") + ' ' + startDate.getHours().toString().padStart(2, "0") + ':' + startDate.getMinutes().toString().padStart(2, "0") + ':' + '00';
+      var endDate = new Date($("#form-expenses-search #endDate").val() + ' ' + $("#form-expenses-search #endTime").val());
+      endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1).toString().padStart(2, "0") + '-' + endDate.getDate().toString().padStart(2, "0") + ' ' + endDate.getHours().toString().padStart(2, "0") + ':' + endDate.getMinutes().toString().padStart(2, "0") + ':' + '59';
+      if ($("#form-expenses-search #expenseType").val() == "Others") {
+        var expenseType = $("#form-expenses-search #expenseTypeOthers").val();
+      }
+      else {
+        var expenseType = $("#form-expenses-search #expenseType").val();
+      }
+      loader("table-expenses-search-loader", "py", "expenses/search", { startDate: startDate, endDate: endDate, userID: $("#form-expenses-search #userID").val(), expenseType: expenseType, expenseTitle: $("#form-expenses-search #expenseTitle").val(), expenseDetails: $("#form-expenses-search #expenseDetails").val() }, "", true);
+    });
+    expenseSearchDate(new Date(), new Date());
+  });
+  function expenseSearchDate(startDate, endDate) {
+    var startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, "0") + '-' + startDate.getDate().toString().padStart(2, "0");
+    var endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1).toString().padStart(2, "0") + '-' + endDate.getDate().toString().padStart(2, "0");
+    $("#form-expenses-search #startDate").val(startDate);
+    $("#form-expenses-search #startTime").val("12:00 AM");
+    $("#form-expenses-search #endDate").val(endDate);
+    $("#form-expenses-search #endTime").val("11:59 PM");
+    $("#form-expenses-search").trigger("submit");
+  }
+  function expenseTypeFunc() {
+    if ($("#form-expenses-search #expenseType").val() == "Others") {
+      $(".expense-type-others").show();
+      $("#form-expenses-search #expenseTypeOthers").attr("required", "required");
+    }
+    else {
+      $(".expense-type-others").hide();
+      $("#form-expenses-search #expenseTypeOthers").removeAttr("required");
+    }
+  }
+  function loadTableExpenseSearch(data) {
+    var expense_list = "";
+    var id = 1;
+    var total_ = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].expense_id) {
+        if (data[i].users_title !== null && data[i].firstname !== null && data[i].lastname !== null) {
+          var staff = data[i].users_title + ' ' + data[i].firstname + ' ' + data[i].lastname;
+        }
+        else {
+          var staff = "";
+        }
+        if (data[i].type == "Inventory") {
+          var inventory_supply_data = {
+            staff: staff,
+            title: data[i].title,
+            amount: data[i].amount,
+            details: data[i].details,
+            date: data[i].created,
+            type: $(data[i].details).filter("jenrx").attr("type"),
+            supplier: $(data[i].details).filter("jenrx").attr("supplier"),
+            inventory: $(data[i].details).filter("jenrx").attr("inventory"),
+            quantity: $(data[i].details).filter("jenrx").attr("quantity")
+          }
+          details = data[i].details + '<button type="button" class="btn btn-primary btn-xs" title="Inventory Supply Details" onclick=\'inventorySupplyDetails(' + JSON.stringify(JSON.stringify(inventory_supply_data)) + ');\'>Inventory Supply Details</button>';
+        }
+        else {
+          details = data[i].details;
+        }
+        if (data[i].type == "Payroll") {
+          var delete_expense = '<button type="button" class="btn btn-danger btn-xs" title="Delete Payroll" onclick="deleteExpenseConfirm(' + data[i].expense_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_expense = '<button type="button" class="btn btn-info btn-xs" title="Edit Payroll" onclick="updatePayroll(' + data[i].expense_id + ');"><i class="fa fa-edit"></i></button>';
+          var print_expense = '<button type="button" class="btn btn-primary btn-xs" title="Print Payroll" onclick="printPayroll(' + data[i].expense_id + ');"><i class="fa fa-print"></i></button>';
+        }
+        else if (data[i].type == "Inventory") {
+          var delete_expense = '<button type="button" class="btn btn-danger btn-xs" title="Delete Inventory Supply" onclick="deleteExpenseConfirm(' + data[i].expense_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_expense = '<button type="button" class="btn btn-info btn-xs" title="Edit Inventory Supply" onclick="updateExpense(' + data[i].expense_id + ');"><i class="fa fa-edit"></i></button>';
+          var print_expense = '<button type="button" class="btn btn-primary btn-xs" title="Print Inventory Supply Details" onclick=\'inventorySupplyDetails(' + JSON.stringify(JSON.stringify(inventory_supply_data)) + ');\'><i class="fa fa-print"></i></button>';
+        }
+        else {
+          var delete_expense = '<button type="button" class="btn btn-danger btn-xs" title="Delete Expense" onclick="deleteExpenseConfirm(' + data[i].expense_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_expense = '<button type="button" class="btn btn-info btn-xs" title="Edit Expense" onclick="updateExpense(' + data[i].expense_id + ');"><i class="fa fa-edit"></i></button>';
+          var print_expense = '';
+        }
+        var dates = '<button type="button" class="btn btn-primary btn-xs">Created: ' + data[i].created + '</button><button type="button" class="btn btn-info btn-xs">Updated: ' + data[i].updated + '</button>';
+        expense_list = expense_list + '<tr>' +
+            '<td>' + id + '</td>' +
+            '<td>' + delete_expense + update_expense + print_expense + '</td>' +
+            '<td>' + staff + '</td>' +
+            '<td>' + data[i].type + '</td>' +
+            '<td>' + data[i].title + '</td>' +
+            '<td>' + data[i].amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td>' + details + '</td>' +
+            '<td>' + dates + '</td>' +
+          '</tr>';
+        total_ = total_ + data[i].amount;
+        id++;
+      }
+    }
+    $("#table-expenses-search").DataTable().destroy();
+    $("#table-expenses-search-loader").html("");
+    $("#expense-search-list").html(expense_list);
+    $("#expenses-search-total").html(getStorage("settingsSalesCurrency") + total_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+    var titleAttr = 'Expenses - ' + $("#form-expenses-search #startDate").val() + ' ' + $("#form-expenses-search #startTime").val() + ' - ' + $("#form-expenses-search #endDate").val() + ' ' + $("#form-expenses-search #endTime").val() + '\n' + ' Total ' + $("#expenses-search-total").html();
+    dataTablesButtons("table-expenses-search", titleAttr);
+    $("#expenses-search-result").show();
+  }
+  function deleteExpenseConfirm(expenseID) {
+    var content = '<div class="row">' +
+        '<div class="form-group">' +
+            '<label for="submit" class="col-sm-12 control-label">Are you sure you want to delete this expense?</label>' +
+          '<div class="col-sm-12">' +
+            '<button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="$(\'.modal-backdrop\').remove();deleteExpense(' + expenseID + ');"><i class="fa fa-check"></i> &nbsp; YES</button> ' +
+            '<button type="reset" class="btn btn-success" data-dismiss="modal"><i class="fa fa-times"></i> &nbsp; NO</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    popupModal("Confirm", content, "warning", "table-expenses-search-loader");
+  }
+  function deleteExpense(expenseID) {
+    loader("table-expenses-search-loader", "py", 'expenses/delete/' + expenseID, { expenseID: expenseID }, "", true);
+  }
+  function updateExpense(expenseID) {
+    loader("popup-content", "popup", "expenses-update", "", "", false);
+    setTimeout(function() { loader("table-expenses-search-loader", "py", 'expenses/select/' + expenseID, { expenseID: expenseID }, "", false); }, 1000);
+  }
+  function updatePayroll(expenseID) {
+    loader("popup-content", "popup", "payroll-update", "", "", false);
+    setTimeout(function() { loader("table-expenses-search-loader", "py", 'expenses/select/' + expenseID, { expenseID: expenseID }, "", false); }, 1000);
+  }
+  function printPayroll(expenseID) {
+    loader("popup-content", "templates", "print-payroll", "", "", false);
+    setTimeout(function() { loader("table-expenses-search-loader", "py", 'expenses/select/' + expenseID, { expenseID: expenseID }, "", false); }, 1000);
+  }
+  function inventorySupplyDetails(inventory_supply_data) {
+    loader("popup-content", "popup", "inventory-supply-details", "", "", false);
+    inventory_supply_data = $.parseJSON(inventory_supply_data);
+    setTimeout(function() { loader("table-expenses-search-loader", "py", 'suppliers/select/' + inventory_supply_data.supplier, { supplier: inventory_supply_data.supplier }, "", false); loader("table-expenses-search-loader", "py", 'inventory/select/' + inventory_supply_data.inventory, { inventory: inventory_supply_data.inventory }, "", false); loadSupplyDetails(inventory_supply_data); }, 1000);
+  }
+</script>

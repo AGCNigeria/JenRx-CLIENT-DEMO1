@@ -1,0 +1,172 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Update Suppliers
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="glyphicon glyphicon-user active"></i><i class="fa fa-edit active"></i> Update Suppliers</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Update Suppliers</h3>
+    </div>
+    <div class="box-body">
+
+      <form id="form-suppliers-select" class="form-horizontal">
+        <div class="form-group">
+          <label for="supplier" class="col-sm-2 control-label">Supplier</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="supplier" id="supplier" placeholder="Search Supplier" style="width: 100%;" required onchange="selectSupplier()">
+              </select>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form id="form-suppliers-update" class="form-horizontal">
+        <input type="hidden" class="form-control" name="supplierID" id="supplierID" required>
+        <input type="hidden" class="form-control" name="supplierStatus" id="supplierStatus" value="active" required>
+        <input type="hidden" class="form-control" name="updateType" id="updateType" value="supplier" required>
+        <div class="form-group">
+          <label for="supplierTitle" class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="supplierTitle" id="supplierTitle" placeholder="Title" required>
+                <option value="">Select a Title</option>
+                <option>Mr</option>
+                <option>Mrs</option>
+                <option>Miss</option>
+                <option>Ms.</option>
+              </select>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierFirstname" class="col-sm-2 control-label">First Name</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="supplierFirstname" id="supplierFirstname" placeholder="First Name" required>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierLastname" class="col-sm-2 control-label">Last Name</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="supplierLastname" id="supplierLastname" placeholder="Last Name" required>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierGender" class="col-sm-2 control-label">Gender</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <select class="form-control" name="supplierGender" id="supplierGender" placeholder="Gender" required>
+                <option value="">Select a Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="unspecified">Unspecified</option>
+              </select>
+              <span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierCompany" class="col-sm-2 control-label">Company</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="supplierCompany" id="supplierCompany" placeholder="Company" required>
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierAddress" class="col-sm-2 control-label">Address</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="supplierAddress" id="supplierAddress" placeholder="Address" required>
+              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierPhone" class="col-sm-2 control-label">Phone</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="tel" class="form-control" name="supplierPhone" id="supplierPhone" placeholder="Phone" required>
+              <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="supplierEmail" class="col-sm-2 control-label">Email</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="email" class="form-control" name="supplierEmail" id="supplierEmail" placeholder="Email" required>
+              <span class="input-group-addon"><i class="fa fa-at"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Update Supplier</button>
+          </div>
+        </div>
+      </form>
+      <div id="form-suppliers-update-loader"></div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    select2Search("suppliers", "form-suppliers-select #supplier");
+    $("#form-suppliers-update").hide();
+    $("#form-suppliers-update #supplierDateofbirth").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+    $("#form-suppliers-update").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      loader("form-suppliers-update-loader", "py", 'suppliers/update/' + $("#form-suppliers-update #supplierID").val(), $("#form-suppliers-update").serializeArray(), "", true);
+    });
+  });
+  function selectSupplier() {
+    $("#form-suppliers-update #supplierID").val($("#form-suppliers-select #supplier").val());
+    loader("py-content", "py", 'suppliers/select/' + $("#form-suppliers-update #supplierID").val(), { supplier: $("#form-suppliers-select #supplier").val() }, "", false);
+    $("#form-suppliers-update").show();
+  }
+  function loadFormSupplierUpdate(suppliers) {
+    $("#form-suppliers-update #supplierTitle").val(suppliers[0].title);
+    $("#form-suppliers-update #supplierFirstname").val(suppliers[0].firstname);
+    $("#form-suppliers-update #supplierLastname").val(suppliers[0].lastname);
+    $("#form-suppliers-update #supplierGender").val(suppliers[0].gender);
+    $("#form-suppliers-update #supplierCompany").val(suppliers[0].company);
+    $("#form-suppliers-update #supplierAddress").val(suppliers[0].address);
+    $("#form-suppliers-update #supplierPhone").val(suppliers[0].phone);
+    $("#form-suppliers-update #supplierEmail").val(suppliers[0].email);
+    $("#form-suppliers-update #supplierStatus").val(suppliers[0].status);
+  }
+</script>

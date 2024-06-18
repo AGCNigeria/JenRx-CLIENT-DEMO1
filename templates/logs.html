@@ -1,0 +1,137 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Logs
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-newspaper-o active"></i> Logs</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- START CUSTOM TABS -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Custom Tabs -->
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#AccessLogs" data-toggle="tab">Access Logs <span class="table-access-logs-loader"></span></a></li>
+          <li><a href="#RenderErrorLogs" data-toggle="tab">Render Error Logs <span class="table-render-error-logs-loader"></span></a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane table-responsive active" id="AccessLogs">
+            <p>
+              <b>Logs</b> <span class="table-access-logs-loader"></span>
+            </p>
+            <table id="table-access-logs" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Staff</th>
+                  <th>ID</th>
+                  <th>Loader</th>
+                  <th>Module</th>
+                  <th>Data</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Date</th>
+                  <th>Staff</th>
+                  <th>ID</th>
+                  <th>Loader</th>
+                  <th>Module</th>
+                  <th>Data</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane table-responsive" id="RenderErrorLogs">
+            <p>
+              <b>Logs</b> <span class="table-render-error-logs-loader"></span>
+            </p>
+            <table id="table-render-error-logs" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Message</th>
+                  <th>URL</th>
+                  <th>Line</th>
+                  <th>Column</th>
+                  <th>Error</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Date</th>
+                  <th>Message</th>
+                  <th>URL</th>
+                  <th>Line</th>
+                  <th>Column</th>
+                  <th>Error</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+      </div>
+      <!-- nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+  <!-- END CUSTOM TABS -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    userAccessCheck();
+    placeholder("table-access-logs-loader");
+    placeholder("table-render-error-logs-loader");
+    $("#table-access-logs").DataTable({
+      "ajax": {
+          "url": "../php/logs.php?type=html",
+          "dataSrc": "",
+          "complete": function() {
+            $(".table-access-logs-loader").html("");
+          }
+      },
+      "columns": [
+          { "data": "date" },
+          { "data": "staff" },
+          { "data": "id" },
+          { "data": "loader" },
+          { "data": "module" },
+          { "data": "data" }
+      ],
+      "order": [[ 0, 'desc' ]],
+      "deferRender": true
+    });
+    $("#table-render-error-logs").DataTable({
+      "ajax": {
+          "url": "../php/logs.php?type=js",
+          "dataSrc": "",
+          "complete": function() {
+            $(".table-render-error-logs-loader").html("");
+          }
+      },
+      "columns": [
+          { "data": "date" },
+          { "data": "message" },
+          { "data": "url" },
+          { "data": "line" },
+          { "data": "column" },
+          { "data": "error" }
+      ],
+      "order": [[ 0, 'desc' ]],
+      "deferRender": true
+    });
+  });
+</script>

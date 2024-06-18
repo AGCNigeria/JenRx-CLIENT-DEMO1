@@ -1,0 +1,130 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Customers List
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="glyphicon glyphicon-user active"></i><i class="fa fa-list active"></i> Customers List</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Customers List</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#customers-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='customersList("active");'>All</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='customersList("inactive");'>Inactive</button>
+          <br><br><br>
+        </div>
+      </div>
+      <div class="col-md-12 table-responsive" id="customers-list-result">
+        <table id="table-customers-list" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody id="customers-list-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Dates</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-customers-list-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#customers-list-result").hide();
+    customersList("active");
+  });
+  function customersList(status) {
+    loader("table-customers-list-loader", "py", 'customers/list/' + status, { status: status }, "", true);
+  }
+  function loadTableCustomersList(status, data) {
+    var customers_list = "";
+    var id = 1;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].customer_id) {
+        if (status == "active") {
+          var inactivate_customer = '<button type="button" class="btn btn-danger btn-xs" title="Inactivate Customer" onclick="inactivateCustomer(' + data[i].customer_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_customer = '<button type="button" class="btn btn-info btn-xs" title="Update Customer" onclick="updateCustomer(' + data[i].customer_id + ');"><i class="fa fa-edit"></i></button>';
+        }
+        else {
+          var inactivate_customer = '<button type="button" class="btn btn-black btn-xs" title="Reactivate Customer" onclick="reactivateCustomer(' + data[i].customer_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_customer = "";
+        }
+        var dates = '<button type="button" class="btn btn-primary btn-xs">Created: ' + data[i].created + '</button><button type="button" class="btn btn-info btn-xs">Updated: ' + data[i].updated + '</button>';
+        customers_list = customers_list + '<tr>' +
+            '<td>' + inactivate_customer + update_customer + id + '</td>' +
+            '<td>' + data[i].title + '</td>' +
+            '<td>' + data[i].firstname + '</td>' +
+            '<td>' + data[i].lastname + '</td>' +
+            '<td>' + data[i].gender + '</td>' +
+            '<td>' + data[i].dateofbirth + '</td>' +
+            '<td>' + data[i].address + '</td>' +
+            '<td>' + data[i].phone + '</td>' +
+            '<td>' + data[i].email + '</td>' +
+            '<td>' + dates + '</td>' +
+          '</tr>';
+        id++;
+      }
+    }
+    $("#table-customers-list").DataTable().destroy();
+    $("#table-customers-list-loader").html("");
+    $("#customers-list-list").html(customers_list);
+    var titleAttr = 'Customers List - ' + status.toUpperCase() + ' - ' + new Date();
+    dataTablesButtons("table-customers-list", titleAttr);
+    $("#customers-list-result").show();
+  }
+  function inactivateCustomer(customer) {
+    loader("html-content", "popup", "customers-inactivate", "", "", false);
+    setTimeout(function() { $("#form-customers-select #customer").append(new Option("Inactivate Customer", customer, true, true)).trigger('change'); }, 1000);
+  }
+  function updateCustomer(customer) {
+    loader("html-content", "popup", "customers-update", "", "", false);
+    setTimeout(function() { $("#form-customers-select #customer").append(new Option("Update Customer", customer, true, true)).trigger('change'); }, 1000);
+  }
+  function reactivateCustomer(customer) {
+    loader("html-content", "popup", "customers-reactivate", "", "", false);
+    setTimeout(function() { $("#form-customers-select #customer").append(new Option("Reactivate Customer", customer, true, true)).trigger('change'); }, 1000);
+  }
+</script>

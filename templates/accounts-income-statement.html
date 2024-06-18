@@ -1,0 +1,425 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Income Statement
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i><i class="fa fa-search active"></i> Income Statement</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Income Statement</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#accounts-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <form id="form-income-statement-search" class="form-horizontal">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='incomeStatementSearchDate(new Date(), new Date());'>Today</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1); incomeStatementSearchDate(yesterday, yesterday);'>Yesterday</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var sevendays = new Date(); sevendays.setDate(sevendays.getDate() - 7); incomeStatementSearchDate(sevendays, new Date());'>Past 7 Days</button>
+            <button type="button" class="btn btn-primary btn-flat col-md-3 col-sm-3" onclick='var thirtydays = new Date(); thirtydays.setDate(thirtydays.getDate() - 30); incomeStatementSearchDate(thirtydays, new Date());'>Past 30 Days</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="startDate" class="col-sm-4 control-label">Start Date</label>
+
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" class="form-control" name="startDate" id="startDate" placeholder="Start Date" required>
+                <span class="input-group-addon"><label for="startDate"><i class="fa fa-calendar"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="startTime" class="col-sm-4 control-label">Start Time</label>
+
+            <div class="col-sm-8 bootstrap-timepicker">
+              <div class="input-group">
+                <input type="text" class="form-control" name="startTime" id="startTime" placeholder="Start Time" required>
+                <span class="input-group-addon"><label for="startTime"><i class="fa fa-clock-o"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="endDate" class="col-sm-4 control-label">End Date</label>
+
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" class="form-control" name="endDate" id="endDate" placeholder="End Date" required>
+                <span class="input-group-addon"><label for="endDate"><i class="fa fa-calendar"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="endTime" class="col-sm-4 control-label">End Time</label>
+
+            <div class="col-sm-8 bootstrap-timepicker">
+              <div class="input-group">
+                <input type="text" class="form-control" name="endTime" id="endTime" placeholder="End Time" required>
+                <span class="input-group-addon"><label for="endTime"><i class="fa fa-clock-o"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="tax" class="col-sm-2 control-label">Tax</label>
+
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number" class="form-control" name="tax" id="tax" value="0" placeholder="Tax" required>
+                <span class="input-group-addon"><label for="tax"><i class="fa fa-calculator"></i></label></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-book"></i> &nbsp; Generate Income Statement</button>
+          </div>
+        </div>
+      </form>
+      <div class="table-responsive" id="income-statement-search-result">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="button" class="btn btn-class btn-lg btn-flat col-md-6 col-sm-6">Gross Profit: <span id="income-statement-search-gross-profit"></span></button>
+            <button type="button" class="btn btn-class btn-lg btn-flat col-md-6 col-sm-6">Net Profit: <span id="income-statement-search-net-profit"></span></button>
+            <br><br><br>
+          </div>
+        </div>
+        <table id="table-income-statement-search" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Income Statement</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-income-statement-search-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-income-statement-search-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    loadTableAccountSearch = undefined;
+    $("#form-income-statement-search #startDate").datepicker({
+      autoclose: true,
+      format: "yyyy-mm-dd"
+    });
+    $("#form-income-statement-search #startTime").timepicker({
+      showInputs: false,
+      defaultTime: "12:00 AM"
+    });
+    $("#form-income-statement-search #endDate").datepicker({
+      autoclose: true,
+      format: "yyyy-mm-dd"
+    });
+    $("#form-income-statement-search #endTime").timepicker({
+      showInputs: false,
+      defaultTime: "11:59 PM"
+    });
+    $("#income-statement-search-result").hide();
+    $("#form-income-statement-search").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      $("#income-statement-search-result").hide();
+      clearStorage("jenrxIncomeStatementSearchList");
+      $(".btn-class").removeClass("btn-warning");
+      $(".btn-class").removeClass("btn-success");
+      $(".btn-class").removeClass("btn-danger");
+      loadIncomeStatementRevenue();
+    });
+    incomeStatementSearchDate(new Date(), new Date());
+  });
+  function incomeStatementSearchDate(startDate, endDate) {
+    var startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, "0") + '-' + startDate.getDate().toString().padStart(2, "0");
+    var endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1).toString().padStart(2, "0") + '-' + endDate.getDate().toString().padStart(2, "0");
+    $("#form-income-statement-search #startDate").val(startDate);
+    $("#form-income-statement-search #startTime").val("12:00 AM");
+    $("#form-income-statement-search #endDate").val(endDate);
+    $("#form-income-statement-search #endTime").val("11:59 PM");
+    $("#form-income-statement-search").trigger("submit");
+  }
+  function loadIncomeStatementRevenue() {
+    var startDate = new Date($("#form-income-statement-search #startDate").val() + ' ' + $("#form-income-statement-search #startTime").val());
+    startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, "0") + '-' + startDate.getDate().toString().padStart(2, "0") + ' ' + startDate.getHours().toString().padStart(2, "0") + ':' + startDate.getMinutes().toString().padStart(2, "0") + ':' + '00';
+    var endDate = new Date($("#form-income-statement-search #endDate").val() + ' ' + $("#form-income-statement-search #endTime").val());
+    endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1).toString().padStart(2, "0") + '-' + endDate.getDate().toString().padStart(2, "0") + ' ' + endDate.getHours().toString().padStart(2, "0") + ':' + endDate.getMinutes().toString().padStart(2, "0") + ':' + '59';
+    loader("table-income-statement-search-loader", "py", 'sales/accounts/search', { startDate: startDate, endDate: endDate, payment: "", inventory: "", customer: "", user: "", info: "", status: "complete" }, "", true);
+  }
+  function loadIncomeStatementExpense() {
+    var startDate = new Date($("#form-income-statement-search #startDate").val() + ' ' + $("#form-income-statement-search #startTime").val());
+    startDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1).toString().padStart(2, "0") + '-' + startDate.getDate().toString().padStart(2, "0") + ' ' + startDate.getHours().toString().padStart(2, "0") + ':' + startDate.getMinutes().toString().padStart(2, "0") + ':' + '00';
+    var endDate = new Date($("#form-income-statement-search #endDate").val() + ' ' + $("#form-income-statement-search #endTime").val());
+    endDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1).toString().padStart(2, "0") + '-' + endDate.getDate().toString().padStart(2, "0") + ' ' + endDate.getHours().toString().padStart(2, "0") + ':' + endDate.getMinutes().toString().padStart(2, "0") + ':' + '59';
+    loader("table-income-statement-search-loader", "py", "expenses/search", { startDate: startDate, endDate: endDate, userID: "", expenseType: "", expenseTitle: "", expenseDetails: "" }, "", true);
+  }
+  function loadTableIncomeStatementAccountsSearch(data) {
+    var income_statement_list = "";
+    var sales_ = 0;
+    var discount_ = 0;
+    var tax_ = 0;
+    var gross_income = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].cart_id) {
+        var p = i - 1;
+        var n = i + 1;
+        if (i != 0 && data[p].sales_id == data[i].sales_id) {
+          var sales = sales + data[i].cart_total;
+        }
+        else {
+          var sales = data[i].cart_total;
+        }
+        if ((n < data.length && data[n].sales_id != data[i].sales_id) || n == data.length) {
+            sales_ = sales_ + sales;
+            if (data[i].discount) {
+              discount_ = discount_ + ((data[i].discount / 100) * sales);
+            }
+            if (data[i].tax) {
+              tax_ = tax_ + ((data[i].tax / 100) * (sales - ((data[i].discount / 100) * sales)));
+            }
+        }
+        else {
+
+        }
+      }
+    }
+    gross_revenue = sales_ - (discount_ + tax_);
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td><button type="button" class="btn btn-success btn-lg btn-flat col-md-12 col-sm-12">Revenue</button></td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+      '</tr>';
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td>Total Sales</td>' +
+        '<td> </td>' +
+        '<td>' + sales_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+        '<td> </td>' +
+      '</tr>';
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td>Sales Discount</td>' +
+        '<td>' + discount_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+      '</tr>';
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td>Sales Tax</td>' +
+        '<td>' + tax_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+      '</tr>';
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td><b>Gross Revenue</b></td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+        '<td><b><span id="gross-revenue">' + gross_revenue.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</span></b></td>' +
+      '</tr>';
+    $("#table-income-statement-search").DataTable().destroy();
+    $("#table-income-statement-search-list").html(getStorage("jenrxIncomeStatementSearchList") + income_statement_list);
+    setStorage("jenrxIncomeStatementSearchList", getStorage("jenrxIncomeStatementSearchList") + income_statement_list);
+    var titleAttr = 'Income Statement - ' + $("#form-income-statement-search #startDate").val() + ' ' + $("#form-income-statement-search #startTime").val() + ' - ' + $("#form-income-statement-search #endDate").val() + ' ' + $("#form-income-statement-search #endTime").val();
+    dataTablesIncomeStatement("table-income-statement-search", titleAttr);
+    $("#income-statement-search-result").show();
+    loadIncomeStatementExpense();
+  }
+  function loadTableIncomeStatementExpenseSearch(data) {
+    var income_statement_list = "";
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td><button type="button" class="btn btn-info btn-lg btn-flat col-md-12 col-sm-12">Expenses</button></td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+        '<td> </td>' +
+      '</tr>';
+    var total_ = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].expense_id) {
+        if (data[i].users_title !== null && data[i].firstname !== null && data[i].lastname !== null) {
+          var staff = data[i].users_title + ' ' + data[i].firstname + ' ' + data[i].lastname;
+        }
+        else {
+          var staff = "";
+        }
+        income_statement_list = income_statement_list + '<tr>' +
+            '<td>' + staff + ' ' + data[i].type + ' ' + data[i].title + '</td>' +
+            '<td>' + data[i].amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</td>' +
+            '<td> </td>' +
+            '<td> </td>' +
+          '</tr>';
+        total_ = total_ + data[i].amount;
+      }
+    }
+    income_statement_list = income_statement_list + '<tr>' +
+        '<td><b>Total Expenses</b></td>' +
+        '<td> </td>' +
+        '<td><b><span id="total-expenses">' + total_.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</span></b></td>' +
+        '<td> </td>' +
+      '</tr>';
+    $("#table-income-statement-search").DataTable().destroy();
+    $("#table-income-statement-search-loader").html("");
+    $("#table-income-statement-search-list").html(getStorage("jenrxIncomeStatementSearchList") + income_statement_list);
+    setStorage("jenrxIncomeStatementSearchList", getStorage("jenrxIncomeStatementSearchList") + income_statement_list);
+    var titleAttr = 'Income Statement - ' + $("#form-income-statement-search #startDate").val() + ' ' + $("#form-income-statement-search #startTime").val() + ' - ' + $("#form-income-statement-search #endDate").val() + ' ' + $("#form-income-statement-search #endTime").val();
+    dataTablesIncomeStatement("table-income-statement-search", titleAttr);
+    $("#income-statement-search-result").show();
+    incomeStatementNet();
+  }
+  function incomeStatementNet() {
+    if ($("#gross-revenue").html() && $("#total-expenses").html()) {
+      var income_statement_list = "";
+      income_statement_list = income_statement_list + '<tr>' +
+          '<td><button type="button" class="btn btn-class btn-lg btn-flat col-md-12 col-sm-12">Profit</button></td>' +
+          '<td> </td>' +
+          '<td> </td>' +
+          '<td> </td>' +
+        '</tr>';
+      var gross_revenue = parseFloat($("#gross-revenue").html().replace(",", ""));
+      var total_expenses = parseFloat($("#total-expenses").html().replace(",", ""));
+      var gross_profit = gross_revenue - total_expenses;
+      var net_profit = gross_profit - (($("#form-income-statement-search #tax").val() / 100) * gross_profit);
+      var tax = ($("#form-income-statement-search #tax").val() / 100) * gross_profit;
+      income_statement_list = income_statement_list + '<tr>' +
+          '<td><b>Gross Profit</b></td>' +
+          '<td> </td>' +
+          '<td> </td>' +
+          '<td><b><span id="gross-profit">' + gross_profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</span></b></td>' +
+        '</tr>';
+      income_statement_list = income_statement_list + '<tr>' +
+          '<td>Income Tax (' + $("#form-income-statement-search #tax").val() + ' %)</td>' +
+          '<td> </td>' +
+          '<td><span id="income-tax">' + tax.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</span></td>' +
+          '<td> </td>' +
+        '</tr>';
+      income_statement_list = income_statement_list + '<tr>' +
+          '<td><b>Net Profit</b></td>' +
+          '<td> </td>' +
+          '<td> </td>' +
+          '<td><b><span id="net-profit">' + net_profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") + '</span></b></td>' +
+        '</tr>';
+      $("#table-income-statement-search").DataTable().destroy();
+      $("#table-income-statement-search-loader").html("");
+      $("#table-income-statement-search-list").html(getStorage("jenrxIncomeStatementSearchList") + income_statement_list);
+      clearStorage("jenrxIncomeStatementSearchList");
+      $("#income-statement-search-gross-profit").html(getStorage("settingsSalesCurrency") + gross_profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+      $("#income-statement-search-net-profit").html(getStorage("settingsSalesCurrency") + net_profit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g,","));
+      var titleAttr = 'Income Statement - ' + $("#form-income-statement-search #startDate").val() + ' ' + $("#form-income-statement-search #startTime").val() + ' - ' + $("#form-income-statement-search #endDate").val() + ' ' + $("#form-income-statement-search #endTime").val() + ' \n ' + ' Gross Profit ' + $("#income-statement-search-gross-profit").html() + ' Net Profit ' + $("#income-statement-search-net-profit").html();
+      dataTablesIncomeStatement("table-income-statement-search", titleAttr);
+      $("#income-statement-search-result").show();
+      if (net_profit < 0) {
+        $(".btn-class").addClass("btn-danger");
+      }
+      else if (net_profit == 0) {
+        $(".btn-class").addClass("btn-warning");
+      }
+      else if (net_profit > 0) {
+        $(".btn-class").addClass("btn-success");
+      }
+      else {
+
+      }
+    }
+    else {
+
+    }
+  }
+  function dataTablesIncomeStatement(htmlID, titleAttr) {
+    $('#' + htmlID).DataTable({
+      dom: "Bfrtip",
+      stateSave: true,
+      "ordering": false,
+      "searching": false,
+      "paging": false,
+      "info": false,
+      buttons: [
+        {
+          extend: "copyHtml5",
+          text: "<i class='fa fa-files-o'></i> &nbsp; Copy",
+          titleAttr: 'Copy - ' + titleAttr,
+          exportOptions: {
+            columns: ":visible"
+          }
+        },
+        {
+          extend: "csvHtml5",
+          text: "<i class='fa fa-file-text-o'></i> &nbsp; CSV",
+          title: 'Download CSV - ' + titleAttr,
+          titleAttr: 'Download CSV - ' + titleAttr,
+          exportOptions: {
+            columns: ":visible"
+          }
+        },
+        {
+          extend: "excelHtml5",
+          text: "<i class='fa fa-file-excel-o'></i> &nbsp; Excel",
+          title: 'Download Excel - ' + titleAttr,
+          sheetName: 'Download Excel - ' + titleAttr,
+          titleAttr: 'Download Excel - ' + titleAttr,
+          autoFilter: true,
+          exportOptions: {
+            columns: ":visible"
+          }
+        },
+        {
+          text: "JSON",
+          text: "<i class='fa fa-file-code-o'></i> &nbsp; JSON",
+          action: function (e, dt, button, config) {
+            var data = dt.buttons.exportData();
+            $.fn.dataTable.fileSave(
+              new Blob([JSON.stringify(data)]),
+              'Download JSON - ' + titleAttr + '.json'
+            );
+          },
+          titleAttr: 'Download JSON - ' + titleAttr,
+          exportOptions: {
+            columns: ":visible"
+          }
+        },
+        {
+          extend: "pdfHtml5",
+          text: "<i class='fa fa-file-pdf-o'></i> &nbsp; PDF",
+          title: 'Download PDF - ' + titleAttr,
+          titleAttr: 'Download PDF - ' + titleAttr,
+          orientation: "landscape",
+          exportOptions: {
+            columns: ":visible"
+          }
+        }
+      ]
+    }).draw();
+  }
+</script>

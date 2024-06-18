@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JenRx</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="dist/css/font-awesome-4.5.0.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="dist/css/ionicons-2.0.1.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- JenRx style -->
+    <link rel="stylesheet" href="dist/css/jenrx.css">
+  </head>
+  <body id="body"></body>
+</html>
+<!-- jQuery 2.2.0 -->
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- JenRx JS -->
+<script src="dist/js/jenrx.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    signOut();
+    loader("body", "templates", "startup", "", "hold-transition login-page", true);
+  });
+</script>

@@ -1,0 +1,94 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Accounts
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-book active"></i> Accounts</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-search", "", "", true);scroll("accounts-content");'>
+            <h3 class="text-white">Search</h3>
+          </a>
+
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-search", "", "", true);scroll("accounts-content");'>
+            <p class="text-white">Search Accounts</p>
+          </a>
+        </div>
+        <div class="icon">
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-search", "", "", true);scroll("accounts-content");'>
+            <i class="fa fa-book text-white"></i>
+            <i class="fa fa-search text-white"></i>
+          </a>
+        </div>
+        <a href="#" onclick='loader("accounts-content", "templates", "accounts-search", "", "", true);scroll("accounts-content");' class="small-box-footer text-white">Search Accounts <i class="fa fa-arrow-circle-right text-white"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <a href="#" onclick='loader("html-content", "popup", "accounts-refund-transaction", "", "", false);'>
+            <h3 class="text-white">Refund</h3>
+          </a>
+
+          <a href="#" onclick='loader("html-content", "popup", "accounts-refund-transaction", "", "", false);'>
+            <p class="text-white">Refund Transaction</p>
+          </a>
+        </div>
+        <div class="icon">
+          <a href="#" onclick='loader("html-content", "popup", "accounts-refund-transaction", "", "", false);'>
+            <i class="fa fa-book text-white"></i>
+            <i class="fa fa-exchange text-white"></i>
+          </a>
+        </div>
+        <a href="#" onclick='loader("html-content", "popup", "accounts-refund-transaction", "", "", false);' class="small-box-footer text-white">Refund Transaction <i class="fa fa-arrow-circle-right text-white"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pro-feature">
+      <!-- small box -->
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-income-statement", "", "", true);scroll("accounts-content");'>
+            <h3 class="text-white">Income</h3>
+          </a>
+
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-income-statement", "", "", true);scroll("accounts-content");'>
+            <p class="text-white">Income Statement</p>
+          </a>
+        </div>
+        <div class="icon">
+          <a href="#" onclick='loader("accounts-content", "templates", "accounts-income-statement", "", "", true);scroll("accounts-content");'>
+            <i class="fa fa-book text-white"></i>
+            <i class="fa fa-search text-white"></i>
+          </a>
+        </div>
+        <a href="#" onclick='loader("accounts-content", "templates", "accounts-income-statement", "", "", true);scroll("accounts-content");' class="small-box-footer text-white">Income Statement <i class="fa fa-arrow-circle-right text-white"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+  <!-- /.row -->
+
+  <div id="accounts-content"></div>
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    userAccessCheck();
+    loader("accounts-content", "templates", "accounts-search", "", "", true);
+  });
+</script>

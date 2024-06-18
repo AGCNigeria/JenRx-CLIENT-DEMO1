@@ -1,0 +1,98 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Update Payroll
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-money active"></i><i class="fa fa-edit active"></i> Update Payroll</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Update Payroll</h3>
+    </div>
+    <div class="box-body">
+
+      <form id="form-payroll-update" class="form-horizontal">
+        <input type="hidden" class="form-control" name="expenseID" id="expenseID" required>
+        <input type="hidden" class="form-control userID" name="userID" id="userID" required>
+        <input type="hidden" class="form-control" name="expenseType" id="expenseType" value="Payroll" required>
+        <div class="form-group">
+          <label for="staffPayroll" class="col-sm-2 control-label">Staff</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="staffPayroll" id="staffPayroll" placeholder="Staff" readonly required>
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseTitle" class="col-sm-2 control-label">Title</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" class="form-control" name="expenseTitle" id="expenseTitle" placeholder="Title" required>
+              <span class="input-group-addon"><i class="fa fa-file-archive-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseAmount" class="col-sm-2 control-label">Amount</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="number" min="0" step="0.01" class="form-control" name="expenseAmount" id="expenseAmount" placeholder="Amount" required>
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expenseDetails" class="col-sm-2 control-label">Details</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <textarea class="form-control" name="expenseDetails" id="expenseDetails" placeholder="Details" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Update Payroll</button>
+          </div>
+        </div>
+      </form>
+      <div id="form-payroll-update-loader"></div>
+
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#form-payroll-update").submit(function(e){
+      e.preventDefault(e);
+      $("button").attr("disabled", "disabled");
+      loader("form-payroll-update-loader", "py", 'expenses/update/' + $("#form-payroll-update #expenseID").val(), { expenseID: $("#form-payroll-update #expenseID").val(), userID: $("#form-payroll-update #userID").val(), expenseType: $("#form-payroll-update #expenseType").val(), expenseTitle: $("#form-payroll-update #expenseTitle").val(), expenseAmount: $("#form-payroll-update #expenseAmount").val(), expenseDetails: $("#form-payroll-update #expenseDetails").val() }, "", true);
+    });
+  });
+  function loadFormPayrollUpdate(expenses) {
+    $("#form-payroll-update #expenseID").val(expenses[0].expense_id);
+    $("#form-payroll-update #userID").val(expenses[0].user_id);
+    $("#form-payroll-update #expenseType").val(expenses[0].type);
+    $("#form-payroll-update #staffPayroll").val(expenses[0].users_title + ' ' + expenses[0].firstname + ' ' + expenses[0].lastname);
+    $("#form-payroll-update #expenseTitle").val(expenses[0].title);
+    $("#form-payroll-update #expenseAmount").val(expenses[0].amount);
+    $("#form-payroll-update #expenseDetails").val(expenses[0].details);
+    $("#form-payroll-update #expenseDetails").ckeditor(scroll("form-payroll-update"));
+    loadFormPayrollUpdate = undefined;
+  }
+</script>

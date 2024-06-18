@@ -1,0 +1,139 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Staff List
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-users active"></i><i class="fa fa-list active"></i> Staff List</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Staff List</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" onclick='$("#staff-content").html("");'><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='staffList("active");'>All</button>
+          <button type="button" class="btn btn-primary btn-flat col-md-6 col-sm-6" onclick='staffList("inactive");'>Inactive</button>
+          <br><br><br>
+        </div>
+      </div>
+      <div class="col-md-12 table-responsive" id="staff-list-result">
+        <table id="table-staff-list" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Access</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody id="staff-list-list">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Access</th>
+              <th>Title</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Gender</th>
+              <th>Date of Birth</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Dates</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id="table-staff-list-loader"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+
+</section>
+<!-- /.content -->
+<!-- page script -->
+<script>
+  $(function () {
+    $("#staff-list-result").hide();
+    staffList("active");
+  });
+  function staffList(status) {
+    loader("table-staff-list-loader", "py", 'users/list/' + status, { status: status }, "", true);
+  }
+  function loadTableStaffList(status, data) {
+    var staff_list = "";
+    var id = 1;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].user_id) {
+        if (status == "active") {
+          var inactivate_staff = '<button type="button" class="btn btn-danger btn-xs" title="Inactivate Staff" onclick="inactivateStaff(' + data[i].user_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_staff = '<button type="button" class="btn btn-info btn-xs" title="Update Staff" onclick="updateStaff(' + data[i].user_id + ');"><i class="fa fa-edit"></i></button>';
+        }
+        else {
+          var inactivate_staff = '<button type="button" class="btn btn-black btn-xs" title="Reactivate Staff" onclick="reactivateStaff(' + data[i].user_id + ');"><i class="fa fa-minus"></i></button>';
+          var update_staff = "";
+        }
+        var dates = '<button type="button" class="btn btn-primary btn-xs">Created: ' + data[i].created + '</button><button type="button" class="btn btn-info btn-xs">Updated: ' + data[i].updated + '</button>';
+        staff_list = staff_list + '<tr>' +
+            '<td>' + inactivate_staff + update_staff + id + '</td>' +
+            '<td>' + data[i].access + '</td>' +
+            '<td>' + data[i].title + '</td>' +
+            '<td>' + data[i].firstname + '</td>' +
+            '<td>' + data[i].lastname + '</td>' +
+            '<td>' + data[i].gender + '</td>' +
+            '<td>' + data[i].dateofbirth + '</td>' +
+            '<td>' + data[i].address + '</td>' +
+            '<td>' + data[i].phone + '</td>' +
+            '<td>' + data[i].email + '</td>' +
+            '<td>' + data[i].username + '</td>' +
+            '<td>' + '*****' + '</td>' +
+            '<td>' + dates + '</td>' +
+          '</tr>';
+        id++;
+      }
+    }
+    $("#table-staff-list").DataTable().destroy();
+    $("#table-staff-list-loader").html("");
+    $("#staff-list-list").html(staff_list);
+    var titleAttr = 'Staff List - ' + status.toUpperCase() + ' - ' + new Date();
+    dataTablesButtons("table-staff-list", titleAttr);
+    $("#staff-list-result").show();
+  }
+  function inactivateStaff(user) {
+    loader("html-content", "popup", "staff-inactivate", "", "", false);
+    setTimeout(function() { $("#form-user-select #user").append(new Option("Inactivate Staff", user, true, true)).trigger('change'); }, 1000);
+  }
+  function updateStaff(user) {
+    loader("html-content", "popup", "staff-update", "", "", false);
+    setTimeout(function() { $("#form-user-select #user").append(new Option("Update Staff", user, true, true)).trigger('change'); }, 1000);
+  }
+  function reactivateStaff(user) {
+    loader("html-content", "popup", "staff-reactivate", "", "", false);
+    setTimeout(function() { $("#form-user-select #user").append(new Option("Reactivate Staff", user, true, true)).trigger('change'); }, 1000);
+  }
+</script>
