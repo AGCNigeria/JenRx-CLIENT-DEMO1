@@ -44,6 +44,7 @@ function loader(htmlID, loaderType, script, data, css, spin) {
       return (false);
     }
     if (script.toLowerCase().includes("license")) {
+      return (false);
       url = localhost + ':7380/' + script + "/";
     }
   }
