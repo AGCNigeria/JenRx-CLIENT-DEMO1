@@ -93,16 +93,16 @@
 <script>
   $(function () {
     userAccessCheck();
-    placeholder("table-access-logs-loader");
-    placeholder("table-render-error-logs-loader");
+    // placeholder("table-access-logs-loader");
+    // placeholder("table-render-error-logs-loader");
     $("#table-access-logs").DataTable({
-      "ajax": {
-          "url": "../php/logs.php?type=html",
-          "dataSrc": "",
-          "complete": function() {
-            $(".table-access-logs-loader").html("");
-          }
-      },
+      // "ajax": {
+      //     "url": "../php/logs.php?type=html",
+      //     "dataSrc": "",
+      //     "complete": function() {
+      //       $(".table-access-logs-loader").html("");
+      //     }
+      // },
       "columns": [
           { "data": "date" },
           { "data": "staff" },
@@ -115,13 +115,13 @@
       "deferRender": true
     });
     $("#table-render-error-logs").DataTable({
-      "ajax": {
-          "url": "../php/logs.php?type=js",
-          "dataSrc": "",
-          "complete": function() {
-            $(".table-render-error-logs-loader").html("");
-          }
-      },
+      // "ajax": {
+      //     "url": "../php/logs.php?type=js",
+      //     "dataSrc": "",
+      //     "complete": function() {
+      //       $(".table-render-error-logs-loader").html("");
+      //     }
+      // },
       "columns": [
           { "data": "date" },
           { "data": "message" },

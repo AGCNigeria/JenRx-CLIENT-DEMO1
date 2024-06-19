@@ -715,8 +715,12 @@ function settingsApply() {
   $("#license-settingsBusinessName").html(getStorage("settingsBusinessName"));
   userAccessSetup();
   if ($.parseJSON(getStorage("jenrxLicense")) != true) {
-    $(".pro-feature a").on('click', loader("license-content", "popup", "license-jenrx-pro", "", "", false));
-    $(".clinical-feature a").on('click', loader("license-content", "popup", "license-jenrx-pro", "", "", false));
+    $(".pro-feature a").click(function() {
+      loader("license-content", "popup", "license-jenrx-pro", "", "", false)
+    });
+    $(".clinical-feature a").click(function() {
+      loader("license-content", "popup", "license-jenrx-pro", "", "", false)
+    });
     // $(".pro-feature a").removeAttr("onclick");
     // $(".clinical-feature a").removeAttr("onclick");
     // $(".pro-feature a").attr("onclick", 'loader("license-content", "popup", "license-jenrx-pro", "", "", false);');
