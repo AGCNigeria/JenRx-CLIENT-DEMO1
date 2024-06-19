@@ -715,13 +715,15 @@ function settingsApply() {
   $("#license-settingsBusinessName").html(getStorage("settingsBusinessName"));
   userAccessSetup();
   if ($.parseJSON(getStorage("jenrxLicense")) != true) {
-    $(".pro-feature a").removeAttr("onclick");
-    $(".clinical-feature a").removeAttr("onclick");
-    $(".pro-feature a").attr("onclick", 'loader("license-content", "popup", "license-jenrx-pro", "", "", false);');
-    $(".clinical-feature a").attr("onclick", 'loader("license-content", "popup", "license-jenrx-pro", "", "", false);');
-    $(".clinical-feature input").attr("readonly", "readonly");
-    $(".clinical-feature select").attr("readonly", "readonly");
-    $(".clinical-feature textarea").attr("readonly", "readonly");
+    $(".pro-feature a").on('click', loader("license-content", "popup", "license-jenrx-pro", "", "", false));
+    $(".clinical-feature a").on('click', loader("license-content", "popup", "license-jenrx-pro", "", "", false));
+    // $(".pro-feature a").removeAttr("onclick");
+    // $(".clinical-feature a").removeAttr("onclick");
+    // $(".pro-feature a").attr("onclick", 'loader("license-content", "popup", "license-jenrx-pro", "", "", false);');
+    // $(".clinical-feature a").attr("onclick", 'loader("license-content", "popup", "license-jenrx-pro", "", "", false);');
+    // $(".clinical-feature input").attr("readonly", "readonly");
+    // $(".clinical-feature select").attr("readonly", "readonly");
+    // $(".clinical-feature textarea").attr("readonly", "readonly");
   }
 }
 
